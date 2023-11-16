@@ -1,0 +1,21 @@
+<form [formGroup]="formGroup" (ngSubmit)="guardar()">
+    <div>
+        <label>Subcategoria</label>
+        <select formControlName="subcategoriaId">
+            <option value="">Seleccione</option>
+            <option *ngFor="let item of subcategorias" value="{{item.id}}">{{item.nombre}} {{item.presupuesto | currency}}</option>
+        </select>
+    </div>
+    <div>
+        <label>Cantidad</label>
+        <input type="number" formControlName="cantidad"/>
+    </div>
+    <div>
+        <label>Cantidad meta</label>
+        <input type="number" formControlName="cantidadMeta"/>
+    </div>   
+
+    <button type="submit">
+        Guardar
+    </button>
+</form>

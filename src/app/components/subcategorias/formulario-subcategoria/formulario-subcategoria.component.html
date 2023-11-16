@@ -1,0 +1,67 @@
+<form (ngSubmit)="guardar()" [formGroup]="formGroup">
+    <input type="hidden" formControlName="id" />
+    <div class="mb-3">
+        <label for="categoriaId" class="form-label">Categoria</label>
+        <select type="text" class="form-select" id="categoriaId" formControlName="categoriaId"
+            [ngClass]="{ 'is-invalid': submitted && f['categoriaId'].errors}">
+            <option value="">Seleccione</option>
+            <option *ngFor="let categoria of categorias" value="{{categoria.id}}">
+                {{categoria.nombre}}
+            </option>
+        </select>
+        <div *ngIf="submitted && f['categoriaId'].errors?.['required']" class="invalid-feedback">
+            <div *ngIf="f['categoriaId'].errors?.['required']">Seleccione una categoria</div>
+        </div>
+    </div>
+    <div class="mb-3">
+        <label for="cantidad" class="form-label">Cantidad</label>
+        <input type="number" class="form-control" id="cantidad" formControlName="cantidad"
+            [ngClass]="{ 'is-invalid': submitted && f['cantidad'].errors}">
+        <div *ngIf="submitted && f['cantidad'].errors?.['required']" class="invalid-feedback">
+            <div *ngIf="f['cantidad'].errors?.['required']">Por favor, ingresa una cantidad</div>
+        </div>
+    </div>
+    <!-- <div class="mb-3">
+        <label for="cantidadMeta" class="form-label">Cantidad meta</label>
+        <input type="number" class="form-control" id="cantidadMeta" formControlName="cantidadMeta">
+
+    </div> -->
+    <div class="mb-3">
+        <label for="nombre" class="form-label">Nombre</label>
+        <input type="text" class="form-control" id="nombre" formControlName="nombre"
+            [ngClass]="{ 'is-invalid': submitted && f['nombre'].errors}">
+        <div *ngIf="submitted && f['nombre'].errors?.['required']" class="invalid-feedback">
+            <div *ngIf="f['nombre'].errors?.['required']">Por favor, ingresa un nombre
+            </div>
+        </div>
+    </div>
+    <div class="mb-3">
+        <label for="nota" class="form-label">Nota</label>
+        <input type="text" class="form-control" id="nota" formControlName="nota" maxlength="250"/>
+
+    </div>
+    <div class="mb-3">
+        <label for="esPrimario" class="form-label">¿Es primario?</label>
+        <input type="checkbox" class="form-checkbox" id="esPrimario" formControlName="esPrimario"
+            [ngClass]="{ 'is-invalid': submitted && f['esPrimario'].errors}">
+    </div>
+
+    <div class="text-end">
+        <button type="button" class="btn btn-secondary m-1" data-bs-dismiss="modal" [disabled]="estaCargando"
+            id="botonCerrarDelmodalSubcategoria">Cancelar</button>
+
+        <button type="submit" class="btn btn-primary" [disabled]="estaCargando">
+            <div *ngIf="estaCargando">
+                <div class="spinner-border spinner-border-sm text-light" role="status">
+                    <span class="visually-hidden">Loading...</span>
+                </div>
+                Un momento...
+            </div>
+            <div *ngIf="!estaCargando">
+                <i class="bi bi-save"></i>
+                Guardar
+            </div>
+        </button>
+    </div>
+
+</form>

@@ -1,0 +1,13 @@
+<form [formGroup]="formGroup" (ngSubmit)="guardar()">
+    <div>
+        <label>Cantidad</label>
+        <input formControlName="cantidad" type="number" />
+    </div>    
+    <div>
+        <label>Nota</label>
+        <input formControlName="nota" maxlength="255" />
+    </div>
+    <button type="submit">
+        Guardar
+    </button>
+</form>
