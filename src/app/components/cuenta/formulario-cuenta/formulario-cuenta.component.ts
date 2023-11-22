@@ -25,7 +25,7 @@ export class FormularioCuentaComponent {
       interes: '',
       fechaInicial: '',
       fechaFinal: '',
-      tipoDeCuentaId:''
+      tipoDeCuentaId: ''
     })
     this.repo.tipoDeCuenta.obtenerTodos().subscribe({
       next: (tipoDeCuentas) => {
@@ -45,9 +45,14 @@ export class FormularioCuentaComponent {
       nombre: this.formGroup.get('nombre')?.value,
       fechaInicial: this.formGroup.get('fechaInicial')?.value == '' ? null : this.formGroup.get('fechaInicial')?.value,
       fechaFinal: this.formGroup.get('fechaFinal')?.value == '' ? null : this.formGroup.get('fechaFinal')?.value,
-      tipoDeCuentaId: this.formGroup.get('tipoDeCuentaId')?.value,
+      tipoDeCuenta: this.obtenerTipoDeCuenta(this.formGroup.get('tipoDeCuentaId')?.value),
     }
     console.log(ahorro)
     this.eventEmmiter.emit(ahorro)
+  }
+  obtenerTipoDeCuenta(id: number): TipoDeCuentaDto {
+    var index = this.tipoDeCuentas.findIndex(x => x.id == id)
+
+    return this.tipoDeCuentas[index]
   }
 }

@@ -8,6 +8,9 @@ import { environment } from 'src/environments/environment.development';
   providedIn: 'root'
 })
 export class PresupuestoService {
+  actualizar(presupuestoId: number, presupuesto: PresupuestoDtoIn):Observable<any> {
+    return this.httpClient.put(this.url + presupuesto.versionId + "/Presupuestos/" +presupuestoId, presupuesto)
+  }
   obtener(presupuestoId: string): Observable<PresupuestoDto> {
     return this.httpClient.get<PresupuestoDto>(this.url + "Presupuestos/" + presupuestoId)
   }

@@ -40,6 +40,7 @@ import { FormularioSubcategoriaComponent } from './components/subcategorias/form
 import { AgregarSubcategoriaComponent } from './components/subcategorias/agregar-subcategoria/agregar-subcategoria.component';
 import { EditarSubcategoriaComponent } from './components/subcategorias/editar-subcategoria/editar-subcategoria.component';
 import { FormularioDeHistorialComponent } from './components/historial/formulario-de-historial/formulario-de-historial.component';
+import { ListaDeTransaccionesComponent } from './components/transaccion/lista-de-transacciones/lista-de-transacciones.component';
 
 @NgModule({
   declarations: [
@@ -78,7 +79,8 @@ import { FormularioDeHistorialComponent } from './components/historial/formulari
     AgregarSubcategoriaComponent,
     EditarSubcategoriaComponent,
     FormularioSubcategoriaComponent,
-    FormularioDeHistorialComponent
+    FormularioDeHistorialComponent,
+    ListaDeTransaccionesComponent
   ],
   imports: [
     BrowserModule,

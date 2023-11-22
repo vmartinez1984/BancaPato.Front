@@ -1,6 +1,8 @@
 import { Component, EventEmitter, Output } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { AhorroDto } from 'src/app/interfaces/ahorro-dto';
+import { HistorialDeApartadosDto } from 'src/app/interfaces/historial-de-apartados-dto';
+import { RepositorioService } from 'src/app/services/repositories/repositorio.service';
 
 @Component({
   selector: 'app-formulario-de-historial',
@@ -9,33 +11,49 @@ import { AhorroDto } from 'src/app/interfaces/ahorro-dto';
 })
 export class FormularioDeHistorialComponent {
   formGroup: FormGroup
+  ahorros: AhorroDto[] = []
 
-  @Output() eventEmmiter = new EventEmitter<AhorroDto>()
+  @Output() eventEmmiter = new EventEmitter<HistorialDeApartadosDto>()
 
-  constructor(private formBuilder: FormBuilder) {
+  constructor(
+    private formBuilder: FormBuilder,
+    private repo: RepositorioService
+  ) {
     this.formGroup = this.formBuilder.group({
-      nombre: ['', Validators.required],
-      clabe: '',
+      cantidad: ['', Validators.required],
+      interes: ['', Validators.required],
       nota: '',
-      interes: '',
-      fechaInicial: '',
-      fechaFinal: ''
+      cuentaId: ['', Validators.required],
+    })
+    this.repo.ahorro.obtenerTodos().subscribe({
+      next: (ahorros) => {
+        this.ahorros = this.obtenerConcentradoras(ahorros)
+      }
     })
   }
 
+  obtenerConcentradoras(ahorros: AhorroDto[]): AhorroDto[] {
+    var concentradoras: AhorroDto[] = []
+    ahorros.forEach(item => {
+      if (item.tipoDeCuenta.id == 3)
+        concentradoras.push(item)
+    })
+
+    return concentradoras
+  }
+
   guardar() {
-    // var ahorro: AhorroDto = {
-    //   id: 0,
-    //   balance: 0,
-    //   clabe: this.formGroup.get('clabe')?.value,
-    //   guid: '',
-    //   interes: this.formGroup.get('interes')?.value,
-    //   nota: this.formGroup.get('nota')?.value,
-    //   nombre: this.formGroup.get('nombre')?.value,
-    //   fechaInicial: this.formGroup.get('fechaInicial')?.value == '' ? null : this.formGroup.get('fechaInicial')?.value,
-    //   fechaFinal: this.formGroup.get('fechaFinal')?.value == '' ? null : this.formGroup.get('fechaFinal')?.value,
-    // }
-    // console.log(ahorro)
-    // this.eventEmmiter.emit(ahorro)
+    if (this.formGroup.valid) {
+      var historial: HistorialDeApartadosDto = {
+        id: 0,
+        cantidad: this.formGroup.get('cantidad')?.value,
+        cuentaId: this.formGroup.get('cuentaId')?.value,
+        interes: this.formGroup.get('interes')?.value,
+        fechaDeRegistro: new Date(),
+        guid: '',
+        nota: this.formGroup.get('nota')?.value
+      }
+      this.eventEmmiter.emit(historial)
+    }
   }
 }

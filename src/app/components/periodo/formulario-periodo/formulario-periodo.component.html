@@ -1,1 +1,63 @@
-<p>formulario-periodo works!</p>
+<form (ngSubmit)="guardar()" [formGroup]="formGroup">
+    <input formControlName="id" type="hidden" />
+    <input formControlName="guid" type="hidden" />
+    <div class="mb-3">
+        <label for="versionId" class="form-label">Versión de presupuesto</label>
+        <select type="text" class="form-select" id="versionId" formControlName="versionId"
+            [ngClass]="{ 'is-invalid': submitted && f['versionId'].errors}"
+            (ngModelChange)="enviarVersion()">
+            <option value="">Seleccione</option>
+            <option *ngFor="let version of versiones" value="{{version.id}}">
+                {{version.nombre}}
+            </option>
+        </select>
+        <div *ngIf="submitted && f['versionId'].errors?.['required']" class="invalid-feedback">
+            <div *ngIf="f['versionId'].errors?.['required']">Seleccione una versión</div>
+        </div>
+    </div>
+
+    <div class="mb-3">
+        <label for="nombre" class="form-label">Nombre</label>
+        <input type="text" class="form-control" id="nombre" formControlName="nombre"
+            [ngClass]="{ 'is-invalid': submitted && f['nombre'].errors}">
+        <div *ngIf="submitted && f['nombre'].errors?.['required']" class="invalid-feedback">
+            <div *ngIf="f['nombre'].errors?.['required']">Por favor, ingresa un nombre</div>
+        </div>
+    </div>
+
+    <div class="mb-3">
+        <label for="fechaInicial" class="form-label">Fecha inicial</label>
+        <input type="date" class="form-control" id="fechaInicial" formControlName="fechaInicial"
+            [ngClass]="{ 'is-invalid': submitted && f['fechaInicial'].errors}">
+        <div *ngIf="submitted && f['fechaInicial'].errors?.['required']" class="invalid-feedback">
+            <div *ngIf="f['fechaInicial'].errors?.['required']">Por favor, ingresa una fecha inicial</div>
+        </div>
+    </div>
+    <div class="mb-3">
+        <label for="fechaFinal" class="form-label">Fecha final</label>
+        <input type="date" class="form-control" id="fechaFinal" formControlName="fechaFinal"
+            [ngClass]="{ 'is-invalid': submitted && f['fechaFinal'].errors}">
+        <div *ngIf="submitted && f['fechaFinal'].errors?.['required']" class="invalid-feedback">
+            <div *ngIf="f['fechaFinal'].errors?.['required']">Por favor, ingresa una fecha final</div>
+        </div>
+    </div>
+
+    <div class="text-end">
+        <button type="button" class="btn btn-secondary m-1" data-bs-dismiss="modal" [disabled]="estaCargando"
+            id="botonCerrarDelModalDePresupuesto">Cancelar</button>
+
+        <button type="submit" class="btn btn-primary" [disabled]="estaCargando">
+            <div *ngIf="estaCargando">
+                <div class="spinner-border spinner-border-sm text-light" role="status">
+                    <span class="visually-hidden">Loading...</span>
+                </div>
+                Un momento...
+            </div>
+            <div *ngIf="!estaCargando">
+                <i class="bi bi-save"></i>
+                Guardar
+            </div>
+        </button>
+    </div>
+
+</form>

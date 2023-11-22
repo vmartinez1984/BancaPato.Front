@@ -14,6 +14,7 @@ export interface VersionDtoIn {
 }
 
 export interface PresupuestoDto {
+    ahorroId?: number
     id: number
     subcategoria: SubcategoriaDto
     cantidad: number
@@ -26,4 +27,5 @@ export interface PresupuestoDtoIn {
     cantidad: number
     cantidadMeta: number
     versionId: number
+    ahorroId?:number
 }

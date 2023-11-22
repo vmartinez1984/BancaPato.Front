@@ -1,1 +1,25 @@
-<p>formulario-movimiento works!</p>
+<form [formGroup]="formGroup" (ngSubmit)="guardar()">
+    <div>
+        <label>Presupuestos</label>
+        <select formControlName="presupuestoId">
+            <option value="">Seleccione</option>
+            <option *ngFor="let item of presupuestos" value="{{item.id}}">{{item.subcategoria.nombre}} {{item.cantidad | currency}}</option>
+        </select>
+    </div> 
+    <div>
+        <label>Cantidad</label>
+        <input formControlName="cantidad" type="number" />
+    </div>
+    <div>
+        <label>Nota</label>
+        <input formControlName="nota" maxlength="255" />
+    </div>    
+
+    <button type="submit">
+        Guardar
+    </button>
+</form>
+
+<ul>
+    <li *ngFor="let item of presupuestos"> {{item.subcategoria.id}} {{item.subcategoria.nombre}}</li>
+</ul>

@@ -7,6 +7,7 @@ import { PresupuestoService } from './presupuesto.service';
 import { CategoriaService } from './categoria.service';
 import { HistorialDeApartadosService } from './historial-de-apartados.service';
 import { TipoDeCuentaService } from './tipo-de-cuenta.service';
+import { PeriodoService } from './periodo.service';
 
 @Injectable({
   providedIn: 'root'
@@ -19,6 +20,7 @@ export class RepositorioService {
   categoria: CategoriaService;
   historial: HistorialDeApartadosService
   tipoDeCuenta: TipoDeCuentaService
+  periodo: PeriodoService
 
   constructor(private httpClient: HttpClient) { 
     this.ahorro = new AhorroService(this.httpClient)
@@ -28,5 +30,6 @@ export class RepositorioService {
     this.categoria = new CategoriaService(this.httpClient)
     this.historial = new HistorialDeApartadosService(this.httpClient)
     this.tipoDeCuenta = new TipoDeCuentaService(this.httpClient)
+    this.periodo = new PeriodoService(this.httpClient)
   }
 }

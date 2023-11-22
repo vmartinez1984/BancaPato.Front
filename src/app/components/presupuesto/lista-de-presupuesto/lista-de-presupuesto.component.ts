@@ -24,7 +24,7 @@ export class ListaDePresupuestoComponent {
     this.repo.presupuesto.obtenerTodos(this.versionId).subscribe({
       next: (presupuestos) => {
         this.presupuestos = presupuestos
-        console.log(presupuestos)
+        //console.log(presupuestos)
       }
     })
   }

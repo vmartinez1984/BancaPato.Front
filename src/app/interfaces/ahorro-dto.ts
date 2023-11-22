@@ -1,5 +1,4 @@
-export interface AhorroDto {
-    tipoDeCuentaId: number
+export interface AhorroDto {   
     id: number
     guid: string
     nombre: string
@@ -8,7 +7,8 @@ export interface AhorroDto {
     interes: number
     balance: number
     fechaInicial?: Date
-    fechaFinal?: Date    
+    fechaFinal?: Date
+    tipoDeCuenta: TipoDeCuentaDto
 }
 
 export interface AhorroDtoIn {

@@ -20,7 +20,7 @@ export class AgregarCuentaComponent {
       nota: ahorro.nota,
       fechaFinal: ahorro.fechaFinal,
       fechaInicial: ahorro.fechaInicial,
-      tipoDeCuentaId: ahorro.tipoDeCuentaId
+      tipoDeCuentaId: ahorro.tipoDeCuenta.id
     }
     console.log(ahorroIn)
     this.repo.ahorro.agregar(ahorroIn).subscribe({

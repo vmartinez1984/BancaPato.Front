@@ -14,17 +14,13 @@
     </div>
 
     <div>
-        <label>Fecha incial</label>
+        <label>Cuenta referencia</label>
         <select formControlName="cuentaId">
-            <option></option>
+            <option value="">Selecciones</option>
+            <option *ngFor="let item of ahorros" value="{{item.id}}" >{{item.nombre}}</option>
         </select>
     </div>
-    
-    <div>
-        <label>Fecha final</label>
-        <input formControlName="fechaFinal" type="date"/>
-    </div>
-
+       
     <button type="submit">
         Guardar
     </button>

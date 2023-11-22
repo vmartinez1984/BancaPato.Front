@@ -7,3 +7,11 @@ export interface HistorialDeApartadosDto {
     nota: string
     cuentaId: number
 }
+
+export interface HistorialDeApartadosDtoIn {
+    guid: string
+    cantidad: number
+    interes: number
+    nota: string
+    cuentaId: number
+}

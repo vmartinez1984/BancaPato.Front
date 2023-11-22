@@ -7,6 +7,13 @@
         </select>
     </div>
     <div>
+        <label>Ahorro destino</label>
+        <select formControlName="ahorroId">
+            <option value="">Seleccione</option>
+            <option *ngFor="let item of ahorros" value="{{item.id}}">{{item.nombre}} {{item.nota}} {{item.balance| currency}}</option>
+        </select>
+    </div>
+    <div>
         <label>Cantidad</label>
         <input type="number" formControlName="cantidad"/>
     </div>
