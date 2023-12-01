@@ -1,1 +1,5 @@
-<p>editar-cuenta works!</p>
+<div class="container">
+    <h2 class="text-primary">Editar ahorro</h2>
+    <hr class="text-primary"/>
+    <app-formulario-cuenta (eventEmmiter)="actualizarAhorro($event)" [ahorro]="ahorro" />
+</div>

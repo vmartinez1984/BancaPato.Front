@@ -14,8 +14,7 @@ export class FormularioPeriodoComponent {
   estaCargando: boolean = false
   formGroup!: FormGroup
 
-  @Output() eventEmitterPeriodo = new EventEmitter<PeriodoDto>()
-  //@Output() eventEmitterVersion = new EventEmitter<VersionDePresupuestoDto>()
+  @Output() eventEmitterPeriodo = new EventEmitter<PeriodoDto>()  
   @Input() periodo!: PeriodoDto
 
   versiones: VersionDto[] = []

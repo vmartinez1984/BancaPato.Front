@@ -12,26 +12,29 @@ import { AgregarSubcategoriaComponent } from './components/subcategorias/agregar
 import { EditarSubcategoriaComponent } from './components/subcategorias/editar-subcategoria/editar-subcategoria.component';
 import { AgregarPresupuestoComponent } from './components/presupuesto/agregar-presupuesto/agregar-presupuesto.component';
 import { EditarPresupuestoComponent } from './components/presupuesto/editar-presupuesto/editar-presupuesto.component';
-import { ListaDePresupuestoComponent } from './components/presupuesto/lista-de-presupuesto/lista-de-presupuesto.component';
 import { ListaDeHistorialComponent } from './components/historial/lista-de-historial/lista-de-historial.component';
 import { AgregarHistorialComponent } from './components/historial/agregar-historial/agregar-historial.component';
 import { ListaDePeriodosComponent } from './components/periodo/lista-de-periodos/lista-de-periodos.component';
 import { AgregarPeriodoComponent } from './components/periodo/agregar-periodo/agregar-periodo.component';
-import { ListaDeMovimientosComponent } from './components/movimiento/lista-de-movimientos/lista-de-movimientos.component';
 import { AgregarMovimientoComponent } from './components/movimiento/agregar-movimiento/agregar-movimiento.component';
-import { ListaDeTransaccionesComponent } from './components/transaccion/lista-de-transacciones/lista-de-transacciones.component';
+import { EditarCuentaComponent } from './components/cuenta/editar-cuenta/editar-cuenta.component';
+import { DetallesDeCuentaComponent } from './components/cuenta/detalles/detalles.component';
+import { DetallesDePeriodoComponent } from './components/periodo/detalles-de-periodo/detalles-de-periodo.component';
+import { VersionDetallesComponent } from './components/version/version-detalles/version-detalles.component';
 
 const routes: Routes = [
+  { path: '', component: ListaDeHistorialComponent},
   { path: 'ahorros', component: ListaDeCuentasComponent },
   { path: 'ahorros/agregar', component: AgregarCuentaComponent },
   { path: 'ahorros/:id/retiros', component: RetiroComponent },
   { path: 'ahorros/:id/depositos', component: DepositoComponent },
-  { path: 'ahorros/:id/detalles', component: ListaDeTransaccionesComponent },
+  { path: 'ahorros/:id/detalles', component: DetallesDeCuentaComponent },
+  { path: 'ahorros/:id/editar', component: EditarCuentaComponent },
   { path: 'subcategorias', component: ListaDeSubcategoriasComponent },
   { path: 'versiones', component: ListaDeVersionesComponent },
   { path: 'versiones/agregar', component: AgregarVersionComponent },
   { path: 'versiones/editar/:id', component: EditarVersionComponent },
-  { path: 'versiones/:id/presupuestos', component: ListaDePresupuestoComponent },
+  { path: 'versiones/:id/presupuestos', component: VersionDetallesComponent },
   { path: 'versiones/:id/presupuestos/agregar', component: AgregarPresupuestoComponent },
   { path: 'versiones/:id/presupuestos/editar/:presupuestoId', component: EditarPresupuestoComponent },
   { path: 'subcategorias', component: ListaDeSubcategoriasComponent },
@@ -41,7 +44,7 @@ const routes: Routes = [
   { path: 'historialDeApartados/agregar', component: AgregarHistorialComponent },
   { path: 'periodos', component: ListaDePeriodosComponent },
   { path: 'periodos/agregar', component: AgregarPeriodoComponent },
-  { path: 'periodos/:id/detalles', component: ListaDeMovimientosComponent },
+  { path: 'periodos/:id/detalles', component: DetallesDePeriodoComponent },
   { path: 'periodos/:id/movimientos/agregar', component: AgregarMovimientoComponent },
 ];
 

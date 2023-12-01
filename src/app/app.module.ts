@@ -42,6 +42,10 @@ import { EditarSubcategoriaComponent } from './components/subcategorias/editar-s
 import { FormularioDeHistorialComponent } from './components/historial/formulario-de-historial/formulario-de-historial.component';
 import { ListaDeTransaccionesComponent } from './components/transaccion/lista-de-transacciones/lista-de-transacciones.component';
 
+import { LocationStrategy, HashLocationStrategy } from '@angular/common';
+import { DetallesDeCuentaComponent } from './components/cuenta/detalles/detalles.component';
+import { DetallesDePeriodoComponent } from './components/periodo/detalles-de-periodo/detalles-de-periodo.component';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -80,16 +84,20 @@ import { ListaDeTransaccionesComponent } from './components/transaccion/lista-de
     EditarSubcategoriaComponent,
     FormularioSubcategoriaComponent,
     FormularioDeHistorialComponent,
-    ListaDeTransaccionesComponent
+    ListaDeTransaccionesComponent,
+    DetallesDeCuentaComponent,
+    DetallesDePeriodoComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
     FormsModule,
-    ReactiveFormsModule,    
+    ReactiveFormsModule,        
   ],
-  providers: [],
+  providers: [
+    { provide: LocationStrategy, useClass: HashLocationStrategy }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

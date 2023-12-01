@@ -1,49 +1,40 @@
 <div class="container">
-    <div class="row">
-        <div class="col-md-6">
-            <!-- <app-grafica-pastel [etiquetas]="categorias" [valores]="valores" /> -->
-            <div class="card">
-                <!-- Primarios: {{totalDePrimarios | currency}} -->
-            </div>
+    <div class="card">
+        <div class="card-header">
+            <h2>Subcategorias</h2>
+
+            <button type="button" class="btn btn-primary btn-sm text-white m-1" data-bs-toggle="modal"
+                data-bs-target="#modalAgregarSubcategoria" [routerLink]="['/subcategorias/agregar']">
+                <i class="bi bi-file-earmark-plus"></i>
+                Agregar
+            </button>
+
         </div>
+        <div class="card-body">
 
-        <div class="col-md-6">
-            <div class="card">
-                <div class="card-header">
-                    <h2>Subcategorias</h2>
+            <table class="table table-hover" width="100%">
+                <thead>
+                    <tr>
+                        <th>Nombre</th>
+                        <th>{{balance | currency}}</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngIf="estaCargando">
+                        <td colspan="4">
+                            <div class="text-center">
+                                <div class="spinner-border spinner-border-sm text-primary" role="status">
+                                    <span class="visually-hidden">Loading...</span>
+                                </div>
+                                Un momento...
+                            </div>
+                        </td>
+                    </tr>
 
-                    <button type="button" class="btn btn-primary btn-sm text-white m-1" data-bs-toggle="modal"
-                        data-bs-target="#modalAgregarSubcategoria" [routerLink]="['/subcategorias/agregar']">
-                        <i class="bi bi-file-earmark-plus"></i>
-                        Agregar
-                    </button>
-
-                </div>
-                <div class="card-body">
-
-                    <table class="table table-hover" width="100%">
-                        <thead>
-                            <tr>
-                                <th>Nombre</th>
-                                <th>{{balance | currency}}</th>
-                                <th></th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr *ngIf="estaCargando">
-                                <td colspan="4">
-                                    <div class="text-center">
-                                        <div class="spinner-border spinner-border-sm text-primary" role="status">
-                                            <span class="visually-hidden">Loading...</span>
-                                        </div>
-                                        Un momento...
-                                    </div>
-                                </td>
-                            </tr>
-
-                            <ng-container *ngIf="!estaCargando">
-                                <tr *ngFor="let item of subcategorias">
-                                    <!-- <td>
+                    <ng-container *ngIf="!estaCargando">
+                        <tr *ngFor="let item of subcategorias">
+                            <!-- <td>
                                         <span *ngIf="item.categoria.id == 1">
                                             <i class="bi bi-cash-stack text-success"></i>
                                         </span>
@@ -55,35 +46,35 @@
                                         </span>
 
                                     </td> -->
-                                    <td>
-                                        <div class="row">
-                                            <div class="col-md-6">
-                                                {{item.nombre}}
-                                            </div>
-                                            <div class="col-md-6">
-                                                ¿Primario?
-                                                <span *ngIf="item.esPrimario">
-                                                    <i class="bi bi-check text-success"></i>
-                                                    Si
-                                                </span>
-                                                <span *ngIf="!item.esPrimario">
-                                                    <i class="bi bi-x text-danger"></i>
-                                                    No
-                                                </span>
-                                            </div>
-                                        </div>
-                                    </td>
+                            <td>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        {{item.nombre}}
+                                    </div>
+                                    <div class="col-md-6">
+                                        ¿Primario?
+                                        <span *ngIf="item.esPrimario">
+                                            <i class="bi bi-check text-success"></i>
+                                            Si
+                                        </span>
+                                        <span *ngIf="!item.esPrimario">
+                                            <i class="bi bi-x text-danger"></i>
+                                            No
+                                        </span>
+                                    </div>
+                                </div>
+                            </td>
 
-                                    <td>{{item.presupuesto | currency }}</td>
+                            <td>{{item.presupuesto | currency }}</td>
 
-                                    <td>
-                                        <!-- <div class="row"> -->
-                                        <!-- <div class="col-md-4"> -->
-                                        <button class="btn btn-secondary btn-sm text-white m-1">
-                                            <i class="bi bi-card-list"></i>
-                                            Detalles
-                                        </button>
-                                        <!-- </div>
+                            <td>
+                                <!-- <div class="row"> -->
+                                <!-- <div class="col-md-4"> -->
+                                <button class="btn btn-secondary btn-sm text-white m-1">
+                                    <i class="bi bi-card-list"></i>
+                                    Detalles
+                                </button>
+                                <!-- </div>
                                             <div class="col-md-4">
                                                 <button type="button" class="btn btn-warning btn-sm text-white m-1"
                                                     data-bs-toggle="modal" data-bs-target="#modalEditarSubcategoria"                                                   
@@ -93,19 +84,14 @@
                                                 </button>
                                             </div>
                                         </div> -->
-                                        |
-                                        <a [routerLink]="['/subcategorias/editar/',item.id ]"
-                                            [queryParams]="{id:item.id, categoriaId:item.categoria.id, nombre: item.nombre, esPrimario: item.esPrimario, estaActivo:item.estaActivo, presupuesto: item.presupuesto}">Editar</a>
-                                    </td>
-                                </tr>
-                            </ng-container>
-                        </tbody>
-                    </table>
-                </div>
-            </div>
+                                |
+                                <a [routerLink]="['/subcategorias/editar/',item.id ]"
+                                    [queryParams]="{id:item.id, categoriaId:item.categoria.id, nombre: item.nombre, esPrimario: item.esPrimario, estaActivo:item.estaActivo, presupuesto: item.presupuesto}">Editar</a>
+                            </td>
+                        </tr>
+                    </ng-container>
+                </tbody>
+            </table>
         </div>
     </div>
 </div>
-
-<!-- <app-agregar-subcategoria [targetModal]="'modalAgregarSubcategoria'" (eventEmmiter)="agregar($event)"/>
-    <app-editar-subcategoria [targetModal]="'modalEditarSubcategoria'" [subcategoria]="subcategoria" (eventEmmiter)="actualizar($event)"/> -->

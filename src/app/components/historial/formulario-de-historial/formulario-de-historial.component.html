@@ -2,26 +2,26 @@
    
     <div>
         <label>Cantidad</label>
-        <input formControlName="cantidad" type="number"/>
+        <input formControlName="cantidad" type="number" class="form-control"/>
     </div>
     <div>
         <label>Interes</label>
-        <input formControlName="interes" type="number"/>
+        <input formControlName="interes" type="number" class="form-control"/>
     </div>
     <div>
         <label>Nota</label>
-        <input formControlName="nota" maxlength="255" />
+        <input formControlName="nota" maxlength="255" class="form-control"/>
     </div>
 
     <div>
         <label>Cuenta referencia</label>
-        <select formControlName="cuentaId">
+        <select formControlName="cuentaId" class="form-select">
             <option value="">Selecciones</option>
             <option *ngFor="let item of ahorros" value="{{item.id}}" >{{item.nombre}}</option>
         </select>
     </div>
        
-    <button type="submit">
+    <button type="submit" class="btn btn-primary mt-3">
         Guardar
     </button>
 </form>

@@ -1,23 +1,47 @@
-<a [routerLink]="['/periodos','agregar']">Agregar</a>
-<table width="100%">
-    <thead>
-        <tr>
-            <td>Nombre</td>
-            <td>Inicio</td>
-            <td>Final</td>
-            <TD></TD>
-        </tr>
-    </thead>
-    <tbody>
-        <tr *ngFor="let item of periodos">
-            <td>{{item.nombre}}</td>
-            <td>{{item.fechaInicial | date}}</td>
-            <td>{{item.fechaFinal | date}}</td>
-            <td>
-                <a>Editar</a> |
-                <a>Borrar</a> |
-                <a [routerLink]="['/periodos',item.id,'detalles']" [queryParams]="{versionId: item.versionId}">Detalles</a>
-            </td>
-        </tr>
-    </tbody>
-</table>
+<div class="container">
+    <h2 class="text-primary">Lista de periodos</h2>
+    <a [routerLink]="['/periodos','agregar']">Agregar</a>
+    <table class="table table-hover">
+        <thead>
+            <tr>
+                <th>Nombre</th>
+                <th>Inicio</th>
+                <th>Final</th>
+                <Th></Th>
+            </tr>
+        </thead>
+        <tfoot>
+            <tr>
+                <th>Nombre</th>
+                <th>Inicio</th>
+                <th>Final</th>
+                <Th></Th>
+            </tr>
+        </tfoot>
+        <tbody>
+            <tr *ngIf="estaCargando">
+                <td colspan="4">
+                    <div class="text-center">
+                        <div class="spinner-border spinner-border-sm text-primary" role="status">
+                            <span class="visually-hidden">Loading...</span>
+                        </div>
+                        Un momento...
+                    </div>
+                </td>
+            </tr>
+
+            <ng-container *ngIf="!estaCargando">
+            <tr *ngFor="let item of periodos">
+                <td>{{item.nombre}}</td>
+                <td>{{item.fechaInicial | date}}</td>
+                <td>{{item.fechaFinal | date}}</td>
+                <td>
+                    <a>Editar</a> |
+                    <a>Borrar</a> |
+                    <a [routerLink]="['/periodos',item.id,'detalles']" [queryParams]="{versionId: item.versionId}">Detalles</a>
+                </td>
+            </tr>
+            </ng-container>
+        </tbody>
+    </table>
+</div>

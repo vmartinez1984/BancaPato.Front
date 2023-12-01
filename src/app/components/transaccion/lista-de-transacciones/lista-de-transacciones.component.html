@@ -1,1 +1,29 @@
-<p>lista-de-transacciones works!</p>
+<table class="table table-hover table-sm">
+    <thead>
+        <tr>
+            <th>Id</th>
+            <th>Cantidad</th>
+            <th>Tipo</th>
+            <th>Concepto</th>
+            <th>Fecha </th>
+        </tr>
+    </thead>
+    <tfoot>
+        <tr>
+            <th>Id</th>
+            <th>Cantidad</th>
+            <th>Tipo</th>
+            <th>Concepto</th>
+            <th>Fecha </th>
+        </tr>
+    </tfoot>
+    <tbody>
+        <tr *ngFor="let item of transacciones">
+            <td>{{item.id}}</td>
+            <td>{{item.cantidad | currency}}</td>
+            <td>{{item.tipo}}</td>
+            <td>{{item.concepto}}</td>
+            <td>{{item.fechaDeRegistro | date}}</td>
+        </tr>
+    </tbody>
+</table>

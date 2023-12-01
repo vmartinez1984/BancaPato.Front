@@ -1,39 +1,85 @@
-<form [formGroup]="formGroup" (ngSubmit)="guardar()">
-    <div>
-        <label>Tipo de cuenta</label>
-        <select formControlName="tipoDeCuentaId">
-            <option value="">Seleccione</option>
-            <option *ngFor="let item of tipoDeCuentas" value="{{item.id}}">{{item.nombre}}</option>
-        </select>
-    </div>
-    <div>
-        <label>Nombre</label>
-        <input formControlName="nombre" />
-    </div>
-    <div>
-        <label>Clabe</label>
-        <input formControlName="clabe" />
-    </div>
-    <div>
-        <label>Nota</label>
-        <input formControlName="nota" maxlength="255" />
-    </div>
-    <div>
-        <label>Interes</label>
-        <input formControlName="interes" type="number" />
-    </div>
+<div class="row">
+    <div class="col-6">
 
-    <div>
-        <label>Fecha incial</label>
-        <input formControlName="fechaInicial" type="date" />
-    </div>
+        <form [formGroup]="formGroup" (ngSubmit)="guardar()">
+            <div>
+                <label>Nombre</label>
+                <input formControlName="nombre" class="form-control" type="text" #nombre
+                    [ngClass]="{ 'is-invalid': submitted && f['nombre'].errors}" />
+                <div *ngIf="submitted && f['nombre'].errors?.['required']" class="invalid-feedback">
+                    <div *ngIf="f['nombre'].errors?.['required']">Ingresa un nombre</div>
+                </div>
+            </div>
+            <div>
+                <label>Tipo de cuenta</label>
+                <select formControlName="tipoDeCuentaId" class="form-select"
+                    [ngClass]="{ 'is-invalid': submitted && f['tipoDeCuentaId'].errors}">
+                    <option value="">Seleccione</option>
+                    <option *ngFor="let item of tipoDeCuentas" value="{{item.id}}">{{item.nombre}}</option>
+                </select>
+                <div *ngIf="submitted && f['tipoDeCuentaId'].errors?.['required']" class="invalid-feedback">
+                    <div *ngIf="f['tipoDeCuentaId'].errors?.['required']">Seleccione un tipo de cuenta</div>
+                </div>
+            </div>
+            <div>
+                <label>Cuenta de referencia</label>
+                <select formControlName="cuentaDeReferenciaId" class="form-select">
+                    <option value="">Seleccione</option>
+                    <option *ngFor="let item of ahorros" value="{{item.id}}">{{item.nombre}}</option>
+                </select>
+            </div>
+            <div>
+                <label>Clabe</label>
+                <input formControlName="clabe" class="form-control">
+            </div>
+            <div>
+                <label>Nota</label>
+                <input formControlName="nota" maxlength="255" class="form-control">
+            </div>
+            <div>
+                <label>Interes</label>
+                <input formControlName="interes" type="number" class="form-control"
+                    [ngClass]="{ 'is-invalid': submitted && f['interes'].errors}">
+                <div *ngIf="submitted && f['interes'].errors?.['required']" class="invalid-feedback">
+                    <div *ngIf="f['interes'].errors?.['required']">Ingresa el interes</div>
+                </div>
+            </div>
 
-    <div>
-        <label>Fecha final</label>
-        <input formControlName="fechaFinal" type="date" />
-    </div>
+            <div>
+                <label>Fecha incial</label>
+                <input formControlName="fechaInicial" type="date" class="form-control"
+                    [ngClass]="{ 'is-invalid': submitted && f['fechaInicial'].errors}">
+                <div *ngIf="submitted && f['fechaInicial'].errors?.['required']" class="invalid-feedback">
+                    <div *ngIf="f['fechaInicial'].errors?.['required']">Selecciona una fecha inicial</div>
+                </div>
+            </div>
 
-    <button type="submit">
-        Guardar
-    </button>
-</form>
+            <div>
+                <label>Fecha final</label>
+                <input formControlName="fechaFinal" type="date" class="form-control"
+                    [ngClass]="{ 'is-invalid': submitted && f['fechaFinal'].errors}">
+                <div *ngIf="submitted && f['fechaFinal'].errors?.['required']" class="invalid-feedback">
+                    <div *ngIf="f['fechaFinal'].errors?.['required']">Selecciona una fecha final</div>
+                </div>
+            </div>
+
+            <button routerLink="/ahorros" class="btn btn-outline-secondary mt-3 me-3" type="button">
+                Cancelar
+            </button>
+
+            <button type="submit" class="btn btn-outline-primary mt-3" [disabled]="estaCargando">
+                <div *ngIf="estaCargando">
+                    <div class="spinner-border spinner-border-sm text-light" role="status">
+                        <span class="visually-hidden">Loading...</span>
+                    </div>
+                    Un momento...
+                </div>
+                <div *ngIf="!estaCargando">
+                    <i class="bi bi-save"></i>
+                    Guardar
+                </div>
+            </button>
+        </form>
+
+    </div>
+</div>

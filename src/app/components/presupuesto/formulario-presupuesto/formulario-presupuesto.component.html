@@ -1,28 +1,52 @@
 <form [formGroup]="formGroup" (ngSubmit)="guardar()">
     <div>
         <label>Subcategoria</label>
-        <select formControlName="subcategoriaId">
+        <select formControlName="subcategoriaId" class="form-select"
+            [ngClass]="{ 'is-invalid': submitted && f['subcategoriaId'].errors}" >
             <option value="">Seleccione</option>
             <option *ngFor="let item of subcategorias" value="{{item.id}}">{{item.nombre}} {{item.presupuesto | currency}}</option>
         </select>
+        <div *ngIf="submitted && f['subcategoriaId'].errors?.['required']" class="invalid-feedback">
+            <div *ngIf="f['subcategoriaId'].errors?.['required']">Selecciona subcategoria</div>
+        </div>
     </div>
     <div>
         <label>Ahorro destino</label>
-        <select formControlName="ahorroId">
+        <select formControlName="ahorroId" class="form-select"
+            [ngClass]="{ 'is-invalid': submitted && f['ahorroId'].errors}" >
             <option value="">Seleccione</option>
             <option *ngFor="let item of ahorros" value="{{item.id}}">{{item.nombre}} {{item.nota}} {{item.balance| currency}}</option>
         </select>
+        <div *ngIf="submitted && f['ahorroId'].errors?.['required']" class="invalid-feedback">
+            <div *ngIf="f['ahorroId'].errors?.['required']">Seleccione ahorro</div>
+        </div>
     </div>
     <div>
         <label>Cantidad</label>
-        <input type="number" formControlName="cantidad"/>
+        <input type="number" formControlName="cantidad" class="form-control" [ngClass]="{ 'is-invalid': submitted && f['cantidad'].errors}" />
+        <div *ngIf="submitted && f['cantidad'].errors?.['required']" class="invalid-feedback">
+            <div *ngIf="f['cantidad'].errors?.['required']">Ingresa una cantidad</div>
+        </div>
     </div>
     <div>
         <label>Cantidad meta</label>
-        <input type="number" formControlName="cantidadMeta"/>
+        <input type="number" formControlName="cantidadMeta" class="form-control"/>
     </div>   
 
-    <button type="submit">
-        Guardar
+    <button [routerLink]="['/versiones', presupuesto?.versionId, 'presupuestos']" class="btn btn-outline-secondary mt-3 me-3" type="button">
+        Cancelar
+    </button>
+
+    <button type="submit" class="btn btn-outline-primary mt-3" [disabled]="estaCargando">
+        <div *ngIf="estaCargando">
+            <div class="spinner-border spinner-border-sm text-light" role="status">
+                <span class="visually-hidden">Loading...</span>
+            </div>
+            Un momento...
+        </div>
+        <div *ngIf="!estaCargando">
+            <i class="bi bi-save"></i>
+            Guardar
+        </div>
     </button>
 </form>

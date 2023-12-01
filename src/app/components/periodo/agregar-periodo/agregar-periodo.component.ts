@@ -20,7 +20,8 @@ export class AgregarPeriodoComponent {
       fechaFinal: periodoDto.fechaFinal,
       fechaInicial: periodoDto.fechaInicial,
       nombre: periodoDto.nombre,
-      guid: Guid.newGuid()
+      guid: Guid.newGuid(),
+      versionId : periodoDto.versionId
     }
     this.repo.periodo.agregar(periodo).subscribe({
       next: (data)=>{

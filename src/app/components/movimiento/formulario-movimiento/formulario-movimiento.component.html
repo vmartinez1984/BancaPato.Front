@@ -1,25 +1,41 @@
 <form [formGroup]="formGroup" (ngSubmit)="guardar()">
-    <div>
+    <div class="form-group">
         <label>Presupuestos</label>
-        <select formControlName="presupuestoId">
+        <select formControlName="presupuestoId" class="form-select">
             <option value="">Seleccione</option>
             <option *ngFor="let item of presupuestos" value="{{item.id}}">{{item.subcategoria.nombre}} {{item.cantidad | currency}}</option>
         </select>
     </div> 
     <div>
         <label>Cantidad</label>
-        <input formControlName="cantidad" type="number" />
+        <input type="number" class="form-control" #cantidad formControlName="cantidad"
+            [ngClass]="{ 'is-invalid': submitted && f['cantidad'].errors}">
+        <div *ngIf="submitted && f['cantidad'].errors?.['required']" class="invalid-feedback">
+            <div *ngIf="f['cantidad'].errors?.['required']">Por favor, ingresa una cantidad</div>
+        </div>
     </div>
     <div>
         <label>Nota</label>
-        <input formControlName="nota" maxlength="255" />
+        <input formControlName="nota" maxlength="255" class="form-control"/>
     </div>    
 
-    <button type="submit">
-        Guardar
+    <!-- <button routerLink="/ahorros" class="btn-secondary">
+        Cancelar
+    </button> -->
+    <button type="submit" class="btn btn-primary mt-3" [disabled]="estaCargando">
+        <div *ngIf="estaCargando">
+            <div class="spinner-border spinner-border-sm text-light" role="status">
+                <span class="visually-hidden">Loading...</span>
+            </div>
+            Un momento...
+        </div>
+        <div *ngIf="!estaCargando">
+            <i class="bi bi-save"></i>
+            Guardar
+        </div>
     </button>
 </form>
 
-<ul>
+<!-- <ul>
     <li *ngFor="let item of presupuestos"> {{item.subcategoria.id}} {{item.subcategoria.nombre}}</li>
-</ul>
+</ul> -->

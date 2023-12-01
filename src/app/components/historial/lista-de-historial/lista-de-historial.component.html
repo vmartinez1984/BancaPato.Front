@@ -1,20 +1,55 @@
-<table width="100%">
-    <thead>
-        <tr>
-            <td>Cantidad</td>
-            <td>Fecha</td>
-            <td>Interes</td>
-            <td></td>
-        </tr>        
-    </thead>
-    <tbody>
-        <tr *ngFor="let item of historial">
-            <td>{{item.cantidad | currency}}</td>
-            <td>{{item.fechaDeRegistro | date }}</td>
-            <td>{{item.interes }}</td>
-            <td>
-                <a routerLink="/historialDeApartados/agregar">Agregar</a>
-            </td>
-        </tr>
-    </tbody>
-</table>
+<div class="container">
+    <a routerLink="/historialDeApartados/agregar">Agregar</a>
+    <br/>
+
+    <div style="background-color: white;">
+        <canvas id="chart">{{chart}}</canvas>
+        <!-- <canvas id="chart">{{chart}}</canvas> -->
+        <!-- <canvas [id]="id">{{chart}}</canvas> -->
+    </div>
+
+    <table class="table mt-5">
+        <thead>
+            <tr>
+                <th>Cantidad</th>
+                <th></th>
+                <th>Fecha</th>
+                <th>Interes</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngIf="estaCargando">
+                <td colspan="4">
+                    <div class="text-center">
+                        <div class="spinner-border spinner-border-sm text-primary" role="status">
+                            <span class="visually-hidden">Loading...</span>
+                        </div>
+                        Un momento...
+                    </div>
+                </td>
+            </tr>
+
+            <ng-container *ngIf="!estaCargando">
+                <tr *ngFor="let item of historial1">
+                    <td>{{item.cuenta?.nombre}}/{{item.cuentaId}}</td>
+                    <td>{{item.cantidad | currency}}</td>
+                    <td>{{item.fechaDeRegistro | date }}</td>
+                    <td>{{item.interes }}</td>
+                </tr>
+                <tr *ngFor="let item of historial2">
+                    <td>{{item.cuenta?.nombre}}/{{item.cuentaId}}</td>
+                    <td>{{item.cantidad | currency}}</td>
+                    <td>{{item.fechaDeRegistro | date }}</td>
+                    <td>{{item.interes }}</td>
+                </tr>
+                <tr *ngFor="let item of historial3">
+                    <td>{{item.cuenta?.nombre}}/{{item.cuentaId}}</td>
+                    <td>{{item.cantidad | currency}}</td>
+                    <td>{{item.fechaDeRegistro | date }}</td>
+                    <td>{{item.interes }}</td>
+                </tr>
+            </ng-container>
+        </tbody>
+    </table>
+
+</div>

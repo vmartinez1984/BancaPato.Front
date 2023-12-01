@@ -11,6 +11,17 @@ import { environment } from 'src/environments/environment.development';
 })
 export class AhorroService {
 
+  borrar(id: number): Observable<any> {
+    return this.httpClient.delete(this.url + id)
+  }
+  actualizar(id: number, ahorro: AhorroDtoIn): Observable<any> {
+    return this.httpClient.put(this.url + id, ahorro)
+  }
+
+  obtener(ahorroId: number): Observable<AhorroDto> {
+    return this.httpClient.get<AhorroDto>(this.url + ahorroId)
+  }
+
   retirar(ahorroId: string, retiro: RetiroDto): Observable<any> {
     return this.httpClient.post(this.url + ahorroId + "/retiros", retiro)
   }

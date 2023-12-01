@@ -1,3 +1,10 @@
+<div>
+    <p>
+        Nombre: {{ahorro.nombre}}
+        <br />
+        Balance: {{ahorro.balance | currency}}        
+    </p>
+</div>
 <form [formGroup]="formGroup" (ngSubmit)="guardar()">
     <div>
         <label>Cantidad</label>

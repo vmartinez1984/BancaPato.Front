@@ -1,19 +1,20 @@
-<a [routerLink]="['/versiones',versionId,'presupuestos','agregar']">Agregar</a>
-<table width="100%">
+<table class="table table-hover">
     <thead>
         <tr>
-            <td>$</td>
-            <td>Nombre</td>
-            <td>Ahorro</td>
-            <td></td>
+            <th>$</th>
+            <th>Nombre</th>
+            <th>Ahorro</th>
+            <th></th>
         </tr>
     </thead>
-    <tr *ngFor="let item of presupuestos">
-        <td>{{item.cantidad | currency}}</td>
-        <td>{{item.subcategoria.nombre}}</td>
-        <td>{{item.ahorroId}}</td>
-        <td>
-            <a [routerLink]="['/versiones',item.versionId,'presupuestos','editar',item.id]">Editar</a>
-        </td>
-    </tr>
+    <tbody>
+        <tr *ngFor="let item of presupuestos">
+            <td>{{item.cantidad | currency}}</td>
+            <td>{{item.subcategoria.nombre}}</td>
+            <td>{{item.ahorroId}}</td>
+            <td>
+                <a [routerLink]="['/versiones',item.versionId,'presupuestos','editar',item.id]">Editar</a>
+            </td>
+        </tr>
+    </tbody>
 </table>

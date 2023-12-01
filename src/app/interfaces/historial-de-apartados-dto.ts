@@ -1,3 +1,5 @@
+import { AhorroDto } from "./ahorro-dto"
+
 export interface HistorialDeApartadosDto {
     id: number
     guid: string
@@ -6,6 +8,7 @@ export interface HistorialDeApartadosDto {
     interes: number
     nota: string
     cuentaId: number
+    cuenta?: AhorroDto
 }
 
 export interface HistorialDeApartadosDtoIn {

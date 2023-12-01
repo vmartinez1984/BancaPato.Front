@@ -1,4 +1,5 @@
-export interface AhorroDto {   
+export interface AhorroDto {
+    tipoDeCuentaId: number   
     id: number
     guid: string
     nombre: string
@@ -8,7 +9,8 @@ export interface AhorroDto {
     balance: number
     fechaInicial?: Date
     fechaFinal?: Date
-    tipoDeCuenta: TipoDeCuentaDto
+    tipoDeCuenta: TipoDeCuentaDto    
+    cuentaDeReferenciaId?: number
 }
 
 export interface AhorroDtoIn {
@@ -20,9 +22,21 @@ export interface AhorroDtoIn {
     fechaInicial?: Date
     fechaFinal?: Date    
     tipoDeCuentaId: number
+    cuentaDeReferenciaId?: number
 }
 
 export interface TipoDeCuentaDto{
     id: number
     nombre: string
+}
+
+export interface TrasaccionDto{
+    id: number
+    guid: string
+    cuentaId: number
+    cantidad: number
+    fechaDeRegistro: Date
+    tipo: string
+    concepto: string
+    nota: string
 }

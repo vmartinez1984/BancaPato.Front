@@ -1,0 +1,18 @@
+<div class="container">
+    <div class="card">
+        <!-- <div class="card-header">
+            <h2 class="text-primary">Detalles de la cuenta</h2>
+        </div> -->
+        <div class="card-body">
+            <b>Nombre: </b>{{ahorro?.nombre}}
+            <br/>
+            <b>Nota: </b>{{ahorro?.nota}}
+            <br/>
+            <b>Balance: </b>{{ahorro?.balance | currency}}
+        </div>
+    </div>
+
+    <hr/>
+    
+    <app-lista-de-transacciones/>
+</div>

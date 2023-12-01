@@ -22,20 +22,22 @@ export class AgregarPresupuestoComponent {
   }
 
   agregar(presupuesto: PresupuestoDto) {
-    console.log(presupuesto)
+    //console.log(presupuesto)
     var presupuestoDtoIn: PresupuestoDtoIn = {
       cantidad: presupuesto.cantidad,
-      cantidadMeta: presupuesto.cantidadMeta,
+      cantidadMeta: presupuesto.cantidadMeta + '' == '' ? 0 : presupuesto.cantidadMeta,
       subcategoriaId: presupuesto.subcategoria.id,
-      versionId: this.versionId
+      versionId: parseInt(this.versionId + '')
     }
+    console.log(presupuestoDtoIn)
     this.repo.presupuesto.agregar(this.versionId, presupuestoDtoIn).subscribe({
       next: (data) => {
         this.router.navigate(['versiones', this.versionId, 'presupuestos'])
       }, error: (error) => {
         alert("Valio pepino")
-        console.log(error)
+        //console.log(error)
       }
     })
   }
+
 }

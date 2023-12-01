@@ -1,7 +1,8 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { AhorroDto, AhorroDtoIn } from 'src/app/interfaces/ahorro-dto';
 import { RepositorioService } from 'src/app/services/repositories/repositorio.service';
+import { FormularioCuentaComponent } from '../formulario-cuenta/formulario-cuenta.component';
 
 @Component({
   selector: 'app-agregar-cuenta',
@@ -9,6 +10,7 @@ import { RepositorioService } from 'src/app/services/repositories/repositorio.se
   styleUrls: ['./agregar-cuenta.component.css']
 })
 export class AgregarCuentaComponent {
+  @ViewChild('formulario') formulario!: FormularioCuentaComponent
 
   constructor(private repo: RepositorioService, private router: Router) { }
 
@@ -20,14 +22,17 @@ export class AgregarCuentaComponent {
       nota: ahorro.nota,
       fechaFinal: ahorro.fechaFinal,
       fechaInicial: ahorro.fechaInicial,
-      tipoDeCuentaId: ahorro.tipoDeCuenta.id
+      tipoDeCuentaId: ahorro.tipoDeCuenta.id,
+      cuentaDeReferenciaId: ahorro.cuentaDeReferenciaId
     }
-    console.log(ahorroIn)
-    this.repo.ahorro.agregar(ahorroIn).subscribe({
-      next: (data) => {
-        //alert("datos registrados")
-        this.router.navigate(['ahorros'])
-      }
-    })
+    //console.log(ahorroIn)
+    this.formulario.cargando(true)
+    // this.repo.ahorro.agregar(ahorroIn).subscribe({
+    //   next: (data) => {
+    //     //alert("datos registrados")
+    //     this.router.navigate(['ahorros'])
+    //     this.formulario.cargando(false)
+    //   }
+    // })
   }
 }

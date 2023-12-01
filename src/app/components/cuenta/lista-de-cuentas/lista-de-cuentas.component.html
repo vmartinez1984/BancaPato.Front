@@ -1,32 +1,66 @@
-<a routerLink="/ahorros/agregar">Agregar ahorro</a>
-<br />
-<table width="100%">
-    <thead>
-        <tr>
-            <td>Nombre</td>
-            <td>Tipo</td>
-            <td>Clabe</td>
-            <td>Nota</td>
-            <td>%</td>
-            <td>Balance</td>
-            <td></td>
-        </tr>
-    </thead>
-    <tbody>
-        <tr *ngFor="let ahorro of ahorros">
-            <td>{{ahorro.nombre}}</td>
-            <td>{{ahorro.tipoDeCuenta.nombre}}</td>
-            <td>{{ahorro.clabe}}</td>
-            <td>{{ahorro.nota}}</td>
-            <td>{{ahorro.interes}}</td>
-            <td>{{ahorro.balance | currency}}</td>
-            <td>
-                <a [routerLink]="['/ahorros/', ahorro.id, 'detalles']">Detalles</a> |
-                <a [routerLink]="['/ahorros/', ahorro.id, 'retiros']">Retiro</a> |
-                <a [routerLink]="['/ahorros/', ahorro.id, 'depositos']">Deposito</a> |
-                <a>Editar</a> |
-                <a>Borrar</a>
-            </td>
-        </tr>
-    </tbody>
-</table>
+<div class="container">
+
+    <h2 class="text-primary">Ahorros</h2>
+    <hr class="text-primary"/>
+    <a routerLink="/ahorros/agregar">Agregar ahorro</a>
+    <br />
+          
+    <table class="table table-hover">
+        
+        <thead>
+            <tr>
+                <th>Nombre</th>
+                <th>Tipo</th>
+                <th>Cuenta padre</th>
+                <th>Clabe</th>
+                <th>Nota</th>
+                <th>%</th>
+                <th>Balance</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tfoot>
+            <tr>
+                <th>Nombre</th>
+                <th>Tipo</th>
+                <th>Cuenta padre</th>
+                <th>Clabe</th>
+                <th>Nota</th>
+                <th>%</th>
+                <th>Balance</th>
+                <th></th>
+            </tr>
+        </tfoot>
+        <tbody>
+            <tr *ngIf="estaCargando">
+                <td colspan="8">
+                    <div class="text-center">
+                        <div class="spinner-border spinner-border-sm text-primary" role="status">
+                            <span class="visually-hidden">Loading...</span>
+                        </div>
+                        Un momento...
+                    </div>
+                </td>
+            </tr>
+
+            <ng-container *ngIf="!estaCargando">
+                <tr *ngFor="let ahorro of ahorros">
+                    <td>{{ahorro.nombre}}</td>
+                    <td>{{ahorro.tipoDeCuenta.nombre}}</td>
+                    <td>{{ahorro.cuentaDeReferenciaId}}</td>
+                    <td>{{ahorro.clabe}}</td>
+                    <td>{{ahorro.nota}}</td>
+                    <td>{{ahorro.interes}}</td>
+                    <td>{{ahorro.balance | currency}}</td>
+                    <td>
+                        <a [routerLink]="['/ahorros/', ahorro.id, 'detalles']">Detalles</a> |
+                        <a [routerLink]="['/ahorros/', ahorro.id, 'retiros']">Retiro</a> |
+                        <a [routerLink]="['/ahorros/', ahorro.id, 'depositos']">Deposito</a> |
+                        <a [routerLink]="['/ahorros/', ahorro.id, 'editar']">Editar</a> |
+                        <button class="btn btn-outline-danger btn-sm" (click)="borrar(ahorro)">Borrar</button>
+                    </td>
+                </tr>
+            </ng-container>
+        </tbody>
+    </table>
+</div>

@@ -9,18 +9,22 @@ import { RepositorioService } from 'src/app/services/repositories/repositorio.se
 })
 export class ListaDeVersionesComponent {
   versiones: VersionDto[] = []
+  estaCargando = false
 
   constructor(private repo: RepositorioService) {
     this.obtenerTodos()
   }
 
   obtenerTodos() {
+    this.estaCargando = true
     this.repo.version.obtenerTodos().subscribe({
       next: (versiones) => {
         this.versiones = versiones
         //console.log(versiones)
+        this.estaCargando = false
       }, error: (error) => {
         alert('Valio pepino')
+        this.estaCargando = false
       }
     })
   }
