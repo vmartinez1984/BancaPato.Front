@@ -12,7 +12,7 @@
             </div>
             <div>
                 <label>Tipo de cuenta</label>
-                <select formControlName="tipoDeCuentaId" class="form-select"
+                <select formControlName="tipoDeCuentaId" class="form-select" #tipoDeCuentaId
                     [ngClass]="{ 'is-invalid': submitted && f['tipoDeCuentaId'].errors}">
                     <option value="">Seleccione</option>
                     <option *ngFor="let item of tipoDeCuentas" value="{{item.id}}">{{item.nombre}}</option>
@@ -38,7 +38,7 @@
             </div>
             <div>
                 <label>Interes</label>
-                <input formControlName="interes" type="number" class="form-control"
+                <input formControlName="interes" type="number" class="form-control" #interes
                     [ngClass]="{ 'is-invalid': submitted && f['interes'].errors}">
                 <div *ngIf="submitted && f['interes'].errors?.['required']" class="invalid-feedback">
                     <div *ngIf="f['interes'].errors?.['required']">Ingresa el interes</div>
@@ -47,7 +47,7 @@
 
             <div>
                 <label>Fecha incial</label>
-                <input formControlName="fechaInicial" type="date" class="form-control"
+                <input formControlName="fechaInicial" type="date" class="form-control" #fechaInicial
                     [ngClass]="{ 'is-invalid': submitted && f['fechaInicial'].errors}">
                 <div *ngIf="submitted && f['fechaInicial'].errors?.['required']" class="invalid-feedback">
                     <div *ngIf="f['fechaInicial'].errors?.['required']">Selecciona una fecha inicial</div>
@@ -56,14 +56,14 @@
 
             <div>
                 <label>Fecha final</label>
-                <input formControlName="fechaFinal" type="date" class="form-control"
+                <input formControlName="fechaFinal" type="date" class="form-control" #fechaFinal
                     [ngClass]="{ 'is-invalid': submitted && f['fechaFinal'].errors}">
                 <div *ngIf="submitted && f['fechaFinal'].errors?.['required']" class="invalid-feedback">
                     <div *ngIf="f['fechaFinal'].errors?.['required']">Selecciona una fecha final</div>
                 </div>
             </div>
 
-            <button routerLink="/ahorros" class="btn btn-outline-secondary mt-3 me-3" type="button">
+            <button routerLink="/ahorros" class="btn btn-outline-secondary mt-3 me-3" type="button" [disabled]="estaCargando">
                 Cancelar
             </button>
 

@@ -1,4 +1,4 @@
-import { Component, ElementRef, EventEmitter, Input, Output } from '@angular/core';
+import { Component, ElementRef, EventEmitter, Input, Output, ViewChild, ViewChildren } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AhorroDto, TipoDeCuentaDto } from 'src/app/interfaces/ahorro-dto';
 import { RepositorioService } from 'src/app/services/repositories/repositorio.service';
@@ -20,7 +20,11 @@ export class FormularioCuentaComponent {
   @Input() ahorro!: AhorroDto
   @Output() eventEmmiter = new EventEmitter<AhorroDto>()
 
-  //@ViewChild('nombre') inputCantidad!:ElementRef
+  @ViewChild('nombre') inputNombre! :ElementRef  
+  @ViewChild('tipoDeCuentaId') inputTipoDeCuentaId! :ElementRef  
+  @ViewChild('interes') inputInteres! :ElementRef  
+  @ViewChild('fechaInicial') inputFechaInicial! :ElementRef  
+  @ViewChild('fechaFinal') inputFechaFinal! :ElementRef  
 
   constructor(
     private formBuilder: FormBuilder,
@@ -41,9 +45,12 @@ export class FormularioCuentaComponent {
         })
       }
     })
-    // setTimeout(() => {
-    //   this.inputCantidad.nativeElement.focus()
-    // }, 500)
+  }
+  
+  ngOnInit(){
+    setTimeout(() => {
+      this.inputNombre.nativeElement.focus()
+    }, 500)    
   }
 
   ngOnChanges() {
@@ -94,6 +101,18 @@ export class FormularioCuentaComponent {
       }
       //console.log(ahorro)
       this.eventEmmiter.emit(ahorro)
+    }else{
+      if(this.formGroup.get('nombre')?.errors != null){
+        this.inputNombre.nativeElement.focus()
+      }else if(this.formGroup.get('tipoDeCuentaId')?.errors != null){
+        this.inputTipoDeCuentaId.nativeElement.focus()
+      }else if(this.formGroup.get('interes')?.errors != null){
+        this.inputInteres.nativeElement.focus()
+      }else if(this.formGroup.get('fechaInicial')?.errors != null){
+        this.inputFechaInicial.nativeElement.focus()
+      }else if(this.formGroup.get('fechaFinal')?.errors != null){
+        this.inputFechaFinal.nativeElement.focus()
+      } 
     }
   }
 
@@ -129,8 +148,4 @@ export class FormularioCuentaComponent {
       this.formGroup.controls['cuentaDeReferenciaId'].enable()
     }
   }
-}
-
-function ViewChild(arg0: string): (target: FormularioCuentaComponent, propertyKey: "inputCantidad") => void {
-  throw new Error('Function not implemented.');
 }

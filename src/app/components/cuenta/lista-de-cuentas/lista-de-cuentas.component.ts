@@ -1,4 +1,7 @@
 import { Component } from '@angular/core';
+import { FormBuilder, FormGroup } from '@angular/forms';
+import { data } from 'jquery';
+import { Toast } from 'src/app/helpers/Toast';
 import { AhorroDto } from 'src/app/interfaces/ahorro-dto';
 import { RepositorioService } from 'src/app/services/repositories/repositorio.service';
 
@@ -8,41 +11,32 @@ import { RepositorioService } from 'src/app/services/repositories/repositorio.se
   styleUrls: ['./lista-de-cuentas.component.css']
 })
 export class ListaDeCuentasComponent {
-  estaCargando= false
-  // dtOptions: DataTables.Settings = {}
-
-  borrar(ahorro: AhorroDto) {
-    if (confirm("¿Desea borrar " + ahorro.nombre + " " + ahorro.nota + "?")) {
-      this.repo.ahorro.borrar(ahorro.id).subscribe({
-        next: (data) => {
-          //this.obtenerTodosLosAhorros()
-          var index = this.ahorros.findIndex(x => x.id == ahorro.id)
-          this.ahorros.splice(index, 1)
-        }
-      })
-    }
-  }
-
+  estaCargando = false
+  formGroup!: FormGroup
   ahorros: AhorroDto[] = []
+  ahorrosFiltrados: AhorroDto[] = []
 
-  constructor(private repo: RepositorioService) {
+  constructor(private repo: RepositorioService, private formBuilder: FormBuilder) {
     this.obtenerTodosLosAhorros()
+    this.inicializarFormulario()
+    this.formGroup.valueChanges.subscribe({
+      next: (data) => {
+        //console.log(data)
+        this.filtrar(data)
+      }
+    })
   }
 
-  ngOnInit(): void {
-    // this.dtOptions = {
-    //   ajax: 'https://duck-bank.vmartinez84.xyz/api/Cuentas',
-    //   columns: [{
-    //     title: 'ID',
-    //     data: 'id'
-    //   }, {
-    //     title: 'Nombre',
-    //     data: 'nombre'
-    //   }, {
-    //     title: 'Tipo',
-    //     data: 'tipoDeCuenta.nombre'
-    //   }]
-    // };
+  filtrar(data: any) {
+    if (data.busqueda == '')
+      this.ahorrosFiltrados = this.ahorros
+    else
+      this.ahorrosFiltrados = this.ahorrosFiltrados.filter(
+        item => 
+        item.nota.toLowerCase().indexOf(data.busqueda.toLowerCase()) !== -1
+        ||
+        item.nombre.toLowerCase().indexOf(data.busqueda.toLowerCase()) !== -1
+      )
   }
 
   obtenerTodosLosAhorros() {
@@ -50,6 +44,7 @@ export class ListaDeCuentasComponent {
     this.repo.ahorro.obtenerTodos().subscribe({
       next: (ahorros) => {
         this.ahorros = ahorros
+        this.ahorrosFiltrados = ahorros
         this.estaCargando = false
       },
       error: (error) => {
@@ -58,5 +53,31 @@ export class ListaDeCuentasComponent {
         this.estaCargando = false
       }
     })
+  }
+
+  inicializarFormulario() {
+    this.formGroup = this.formBuilder.group({
+      busqueda: ''
+    })
+  }
+
+  borrar(ahorro: AhorroDto) {
+    if (confirm("¿Desea borrar " + ahorro.nombre + " " + ahorro.nota + "?")) {
+      this.repo.ahorro.borrar(ahorro.id).subscribe({
+        next: (data) => {
+          var index = this.ahorros.findIndex(x => x.id == ahorro.id)
+          this.ahorros.splice(index, 1)
+        },
+        error:(data)=>{
+          Toast.error()
+          console.log(data)
+        }
+      })
+    }
+  }
+
+  limpiarFormulario(){
+    this.formGroup.get('busqueda')?.setValue('')
+    this.ahorrosFiltrados = this.ahorros
   }
 }

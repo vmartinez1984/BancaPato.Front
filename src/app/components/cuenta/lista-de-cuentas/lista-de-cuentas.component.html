@@ -5,8 +5,15 @@
     <a routerLink="/ahorros/agregar">Agregar ahorro</a>
     <br />
           
-    <table class="table table-hover">
-        
+    <form [formGroup]="formGroup">
+        <label>Filtrar</label>
+        <input formControlName="busqueda" type="text" class="form-control"/>
+        <button class="btn btn-secondary" (click)="limpiarFormulario()">
+            Limpiar
+        </button>
+    </form>
+    
+    <table class="table table-hover mt-5">        
         <thead>
             <tr>
                 <th>Nombre</th>
@@ -44,10 +51,14 @@
             </tr>
 
             <ng-container *ngIf="!estaCargando">
-                <tr *ngFor="let ahorro of ahorros">
+                <tr *ngFor="let ahorro of ahorrosFiltrados">
                     <td>{{ahorro.nombre}}</td>
                     <td>{{ahorro.tipoDeCuenta.nombre}}</td>
-                    <td>{{ahorro.cuentaDeReferenciaId}}</td>
+                    <td>
+                        <a [routerLink]="['/ahorros', ahorro.cuentaDeReferenciaId, 'detalles']">
+                            {{ahorro.cuentaDeReferenciaId}}
+                        </a>
+                    </td>
                     <td>{{ahorro.clabe}}</td>
                     <td>{{ahorro.nota}}</td>
                     <td>{{ahorro.interes}}</td>
