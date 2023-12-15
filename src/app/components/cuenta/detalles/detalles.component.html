@@ -7,12 +7,45 @@
             <b>Nombre: </b>{{ahorro?.nombre}}
             <br/>
             <b>Nota: </b>{{ahorro?.nota}}
-            <br/>
+            <br/>            
             <b>Balance: </b>{{ahorro?.balance | currency}}
+            <br/>            
+            <b>Fecha inicial: </b>{{ahorro?.fechaInicial | date}}
+            <br/>            
+            <b>Fecha final: </b>{{ahorro?.fechaFinal | date}}
+            <br/>            
+            <b>Interes anual: </b>{{ahorro?.interes}} % 
+            <br/>            
+            <b>Cantidad esperada: </b>{{ calcularCantidadEsperada() | currency}}
         </div>
     </div>
 
-    <hr/>
+    <hr/>   
     
     <app-lista-de-transacciones/>
+
+    <table class="table table-hover">
+        <thead>
+            <tr>
+                <th>Subtotal</th>
+                <th>Interes</th>
+                <th>Total</th>
+                <th>Movimiento</th>
+                <th>Fecha</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let item of ahorro?.calculos">
+                <td>{{item.subtotal | currency}}</td>
+                <td>{{item.interesCalculado | currency}}</td>
+                <td>{{item.total | currency}}</td>
+                
+                <td *ngIf="item.transaccion == 0">{{item.transaccion | currency}}</td>
+                <td *ngIf="item.transaccion < 0" class="text-danger">{{item.transaccion | currency}}</td>
+                <td *ngIf="item.transaccion > 0" class="text-success">{{item.transaccion | currency}}</td>
+                
+                <td>{{item.fecha | date}}</td>
+            </tr>
+        </tbody>
+    </table>
 </div>

@@ -1,7 +1,8 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AhorroDto, AhorroDtoIn } from 'src/app/interfaces/ahorro-dto';
 import { RepositorioService } from 'src/app/services/repositories/repositorio.service';
+import { FormularioCuentaComponent } from '../formulario-cuenta/formulario-cuenta.component';
 
 @Component({
   selector: 'app-editar-cuenta',
@@ -10,6 +11,9 @@ import { RepositorioService } from 'src/app/services/repositories/repositorio.se
 })
 export class EditarCuentaComponent {
   ahorro!: AhorroDto
+
+  @ViewChild('formulario') formulario!: FormularioCuentaComponent
+
   constructor(
     private activatedRoute: ActivatedRoute,
     private repo: RepositorioService,
@@ -23,16 +27,16 @@ export class EditarCuentaComponent {
 
   obtenerAhorro(ahorroId: number) {
     this.repo.ahorro.obtener(ahorroId).subscribe({
-      next:(ahorro)=>{
+      next: (ahorro) => {
         //console.log(ahorro)
-        this.ahorro= ahorro
+        this.ahorro = ahorro
       }
     })
   }
 
-  actualizarAhorro(ahorroDto: AhorroDto){
-    var ahorro : AhorroDtoIn= {
-      clabe : ahorroDto.clabe,
+  actualizarAhorro(ahorroDto: AhorroDto) {
+    var ahorro: AhorroDtoIn = {
+      clabe: ahorroDto.clabe,
       interes: ahorroDto.interes,
       nombre: ahorroDto.nombre,
       nota: ahorroDto.nota,
@@ -42,12 +46,14 @@ export class EditarCuentaComponent {
       cuentaDeReferenciaId: ahorroDto.cuentaDeReferenciaId
     }
     //console.log(ahorro)
-    this.repo.ahorro.actualizar(this.ahorro.id,ahorro).subscribe({
-      next: (data)=>{
+    this.formulario.cargando(true)
+    this.repo.ahorro.actualizar(this.ahorro.id, ahorro).subscribe({
+      next: (data) => {
         this.router.navigate(['ahorros'])
       },
-      error: (data)=>{
+      error: (data) => {
         alert('Valio pepino')
+        this.formulario.cargando(false)
         console.log(data)
       }
     })

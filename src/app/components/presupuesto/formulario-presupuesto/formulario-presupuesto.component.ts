@@ -48,7 +48,7 @@ export class FormularioPresupuestoComponent {
     this.repo.ahorro.obtenerTodos().subscribe({
       next: (ahorros) => {
         ahorros.forEach(item => {
-          if (item.tipoDeCuenta.id == apartados)
+          //if (item.tipoDeCuenta.id == apartados)
             this.ahorros.push(item)
         })
       }

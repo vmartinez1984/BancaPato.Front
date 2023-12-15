@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
-import { data } from 'jquery';
+import { Subject } from 'rxjs';
 import { Toast } from 'src/app/helpers/Toast';
 import { AhorroDto } from 'src/app/interfaces/ahorro-dto';
 import { RepositorioService } from 'src/app/services/repositories/repositorio.service';
@@ -16,28 +16,40 @@ export class ListaDeCuentasComponent {
   ahorros: AhorroDto[] = []
   ahorrosFiltrados: AhorroDto[] = []
 
+  dtOptions: DataTables.Settings = {}
+  dtTrigger: Subject<any> = new Subject<any>()
+
   constructor(private repo: RepositorioService, private formBuilder: FormBuilder) {
     this.obtenerTodosLosAhorros()
-    this.inicializarFormulario()
-    this.formGroup.valueChanges.subscribe({
-      next: (data) => {
-        //console.log(data)
-        this.filtrar(data)
-      }
-    })
+    // this.inicializarFormulario()
+    // this.formGroup.valueChanges.subscribe({
+    //   next: (data) => {
+    //     //console.log(data)
+    //     this.filtrar(data)
+    //   }
+    // })
   }
 
-  filtrar(data: any) {
-    if (data.busqueda == '')
-      this.ahorrosFiltrados = this.ahorros
-    else
-      this.ahorrosFiltrados = this.ahorrosFiltrados.filter(
-        item => 
-        item.nota.toLowerCase().indexOf(data.busqueda.toLowerCase()) !== -1
-        ||
-        item.nombre.toLowerCase().indexOf(data.busqueda.toLowerCase()) !== -1
-      )
+  ngOnInit(){
+    this.dtOptions = {
+      pagingType: 'full_numbers',
+      responsive: true
+    }
   }
+
+  // filtrar(data: any) {
+  //   if (data.busqueda == '')
+  //     this.ahorrosFiltrados = this.ahorros
+  //   else
+  //     this.ahorrosFiltrados = this.ahorrosFiltrados.filter(
+  //       item => 
+  //       item.nota.toLowerCase().indexOf(data.busqueda.toLowerCase()) !== -1
+  //       ||
+  //       item.nombre.toLowerCase().indexOf(data.busqueda.toLowerCase()) !== -1
+  //       ||
+  //       item.tipoDeCuenta.nombre.toLowerCase().indexOf(data.busqueda.toLowerCase()) !== -1
+  //     )
+  // }
 
   obtenerTodosLosAhorros() {
     this.estaCargando = true
@@ -46,6 +58,7 @@ export class ListaDeCuentasComponent {
         this.ahorros = ahorros
         this.ahorrosFiltrados = ahorros
         this.estaCargando = false
+        this.dtTrigger.next(null)
       },
       error: (error) => {
         alert("Valio pepino")
@@ -76,8 +89,8 @@ export class ListaDeCuentasComponent {
     }
   }
 
-  limpiarFormulario(){
-    this.formGroup.get('busqueda')?.setValue('')
-    this.ahorrosFiltrados = this.ahorros
-  }
+  // limpiarFormulario(){
+  //   this.formGroup.get('busqueda')?.setValue('')
+  //   this.ahorrosFiltrados = this.ahorros
+  // }
 }

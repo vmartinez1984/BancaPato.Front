@@ -11,6 +11,15 @@ export interface AhorroDto {
     fechaFinal?: Date
     tipoDeCuenta: TipoDeCuentaDto    
     cuentaDeReferenciaId?: number
+    calculos?: Calculo[]
+}
+
+export interface Calculo{
+    subtotal: number
+    interesCalculado: number
+    total: number
+    transaccion: number
+    fecha: Date
 }
 
 export interface AhorroDtoIn {

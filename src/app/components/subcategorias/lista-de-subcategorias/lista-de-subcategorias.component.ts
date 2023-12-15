@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Subject } from 'rxjs';
 import { SubcategoriaDto } from 'src/app/interfaces/subcategoria-dto';
 import { RepositorioService } from 'src/app/services/repositories/repositorio.service';
 
@@ -14,9 +15,10 @@ export class ListaDeSubcategoriasComponent {
   totalDePrimarios = 0
   subcategoria!: SubcategoriaDto
   categorias: string[] = ['Entradas', 'Gastos', 'Apartados', 'Primarios', 'Gastos y apartado']
-  valores!: number[]
+  valores!: number[]  
 
-  tituloDelModal = ''
+  dtOptions: DataTables.Settings = {}
+  dtTrigger: Subject<any> = new Subject<any>()
 
   constructor(private repo: RepositorioService) {
     this.estaCargando = true
@@ -28,6 +30,13 @@ export class ListaDeSubcategoriasComponent {
         this.calcularCantidades()
       }
     })
+  }
+
+  ngOnInit(){
+    this.dtOptions = {
+      pagingType: 'full_numbers',
+      responsive: true
+    }
   }
 
   calcularCantidades() {
@@ -76,8 +85,5 @@ export class ListaDeSubcategoriasComponent {
     //console.log(this.subcategorias)
     this.calcularCantidades()   
   }
-
-  agregar(subcategoriaDto: SubcategoriaDto){
-
-  }
+  
 }

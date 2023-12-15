@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { Toast } from 'src/app/helpers/Toast';
 import { PresupuestoDto, PresupuestoDtoIn } from 'src/app/interfaces/version-dto';
 import { RepositorioService } from 'src/app/services/repositories/repositorio.service';
 
@@ -43,6 +44,9 @@ export class EditarPresupuestoComponent {
     this.repo.presupuesto.actualizar(this.presupuesto.id,presupuesto).subscribe({
       next:(data)=>{
         this.router.navigate(['/versiones', presupuesto.versionId, 'presupuestos'])
+      }, error: (error) => {
+        Toast.error()
+        console.log(error)
       }
     })
   }

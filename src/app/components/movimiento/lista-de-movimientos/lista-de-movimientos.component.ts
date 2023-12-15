@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { Subject } from 'rxjs';
 import { AhorroDto } from 'src/app/interfaces/ahorro-dto';
 import { MovimientoPresupuesto, PeriodoDto } from 'src/app/interfaces/periodo-dto';
 import { RepositorioService } from 'src/app/services/repositories/repositorio.service';
@@ -15,7 +16,10 @@ export class ListaDeMovimientosComponent {
   id: any;
   versionId: any = 0
   ahorro?: AhorroDto;
-  estaCargando: boolean = false;
+  estaCargando: boolean = false
+  
+  dtOptions: DataTables.Settings = {}
+  dtTrigger: Subject<any> = new Subject<any>()
 
   constructor(
     private activateRoute: ActivatedRoute,
@@ -31,6 +35,13 @@ export class ListaDeMovimientosComponent {
       this.obtenerPresupuestos(this.versionId)
     })
     this.obtenerCuentaDeNomina()
+  }
+
+  ngOnInit(){
+    this.dtOptions = {
+      pagingType: 'full_numbers',
+      responsive: true
+    }
   }
 
   obtenerCuentaDeNomina() {
@@ -52,6 +63,7 @@ export class ListaDeMovimientosComponent {
         })
         this.obtenerMovimientos(this.id)
         this.estaCargando = false
+        this.dtTrigger.next(null)
       }
     })
   }

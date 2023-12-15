@@ -55,7 +55,7 @@ export class FormularioCuentaComponent {
 
   ngOnChanges() {
     if (this.ahorro != undefined) {
-      //console.log(this.ahorro)
+      console.log(this.ahorro)
       this.formGroup.patchValue({
         nombre: this.ahorro.nombre,
         clabe: this.ahorro.clabe,

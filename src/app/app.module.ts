@@ -2,7 +2,9 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { HttpClientModule } from '@angular/common/http'
 import { ReactiveFormsModule } from '@angular/forms'
-import { FormsModule} from '@angular/forms'
+import { FormsModule } from '@angular/forms'
+
+import { DataTablesModule } from 'angular-datatables'
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -30,7 +32,7 @@ import { FooterComponent } from './templates/footer/footer.component';
 import { MenuComponent } from './templates/menu/menu.component';
 import { DepositoComponent } from './components/transaccion/deposito/deposito.component'
 import { RetiroComponent } from './components/transaccion/retiro/retiro.component'
-import { ListaDeSubcategoriasComponent} from './components/subcategorias/lista-de-subcategorias/lista-de-subcategorias.component'
+import { ListaDeSubcategoriasComponent } from './components/subcategorias/lista-de-subcategorias/lista-de-subcategorias.component'
 import { ListaDeVersionesComponent } from './components/version/lista-de-versiones/lista-de-versiones.component';
 import { FormularioVersionComponent } from './components/version/formulario-version/formulario-version.component';
 import { AgregarVersionComponent } from './components/version/agregar-version/agregar-version.component';
@@ -50,7 +52,7 @@ import { DetallesDePeriodoComponent } from './components/periodo/detalles-de-per
   declarations: [
     AppComponent,
     AgregarCuentaComponent,
-    EditarCuentaComponent,    
+    EditarCuentaComponent,
     ListaDeCuentasComponent,
     ListaDePresupuestoComponent,
     FormularioPresupuestoComponent,
@@ -93,7 +95,8 @@ import { DetallesDePeriodoComponent } from './components/periodo/detalles-de-per
     AppRoutingModule,
     HttpClientModule,
     FormsModule,
-    ReactiveFormsModule,        
+    ReactiveFormsModule,
+    DataTablesModule
   ],
   providers: [
     { provide: LocationStrategy, useClass: HashLocationStrategy }

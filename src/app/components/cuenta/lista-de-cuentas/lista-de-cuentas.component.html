@@ -1,19 +1,26 @@
 <div class="container">
 
     <h2 class="text-primary">Ahorros</h2>
-    <hr class="text-primary"/>
+    <hr class="text-primary" />
     <a routerLink="/ahorros/agregar">Agregar ahorro</a>
     <br />
-          
-    <form [formGroup]="formGroup">
+
+    <!-- <form [formGroup]="formGroup">
         <label>Filtrar</label>
         <input formControlName="busqueda" type="text" class="form-control"/>
         <button class="btn btn-secondary" (click)="limpiarFormulario()">
             Limpiar
         </button>
-    </form>
-    
-    <table class="table table-hover mt-5">        
+    </form> -->
+
+    <div *ngIf="estaCargando" class="text-center">
+        <div class="spinner-border spinner-border-sm text-primary" role="status">
+            <span class="visually-hidden">Loading...</span>
+        </div>
+        Un momento...
+    </div>
+
+    <table datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger" class="table table-hover mt-5">
         <thead>
             <tr>
                 <th>Nombre</th>
@@ -26,6 +33,41 @@
                 <th></th>
             </tr>
         </thead>
+        <tbody>
+            <!-- <tr *ngIf="estaCargando">
+                <td colspan="8">
+                    <div class="text-center">
+                        <div class="spinner-border spinner-border-sm text-primary" role="status">
+                            <span class="visually-hidden">Loading...</span>
+                        </div>
+                        Un momento...
+                    </div>
+                </td>
+            </tr>
+            
+            <ng-container *ngIf="!estaCargando"> -->
+            <tr *ngFor="let ahorro of ahorrosFiltrados">
+                <td>{{ahorro.nombre}}</td>
+                <td>{{ahorro.tipoDeCuenta.nombre}}</td>
+                <td>
+                    <a [routerLink]="['/ahorros', ahorro.cuentaDeReferenciaId, 'detalles']">
+                        {{ahorro.cuentaDeReferenciaId}}
+                    </a>
+                </td>
+                <td>{{ahorro.clabe}}</td>
+                <td>{{ahorro.nota}}</td>
+                <td>{{ahorro.interes}}</td>
+                <td>{{ahorro.balance | currency}}</td>
+                <td>
+                    <a [routerLink]="['/ahorros/', ahorro.id, 'detalles']">Detalles</a> |
+                    <a [routerLink]="['/ahorros/', ahorro.id, 'retiros']">Retiro</a> |
+                    <a [routerLink]="['/ahorros/', ahorro.id, 'depositos']">Deposito</a> |
+                    <a [routerLink]="['/ahorros/', ahorro.id, 'editar']">Editar</a> |
+                    <button class="btn btn-outline-danger btn-sm" (click)="borrar(ahorro)">Borrar</button>
+                </td>
+            </tr>
+            <!-- </ng-container> -->
+        </tbody>
         <tfoot>
             <tr>
                 <th>Nombre</th>
@@ -38,40 +80,5 @@
                 <th></th>
             </tr>
         </tfoot>
-        <tbody>
-            <tr *ngIf="estaCargando">
-                <td colspan="8">
-                    <div class="text-center">
-                        <div class="spinner-border spinner-border-sm text-primary" role="status">
-                            <span class="visually-hidden">Loading...</span>
-                        </div>
-                        Un momento...
-                    </div>
-                </td>
-            </tr>
-
-            <ng-container *ngIf="!estaCargando">
-                <tr *ngFor="let ahorro of ahorrosFiltrados">
-                    <td>{{ahorro.nombre}}</td>
-                    <td>{{ahorro.tipoDeCuenta.nombre}}</td>
-                    <td>
-                        <a [routerLink]="['/ahorros', ahorro.cuentaDeReferenciaId, 'detalles']">
-                            {{ahorro.cuentaDeReferenciaId}}
-                        </a>
-                    </td>
-                    <td>{{ahorro.clabe}}</td>
-                    <td>{{ahorro.nota}}</td>
-                    <td>{{ahorro.interes}}</td>
-                    <td>{{ahorro.balance | currency}}</td>
-                    <td>
-                        <a [routerLink]="['/ahorros/', ahorro.id, 'detalles']">Detalles</a> |
-                        <a [routerLink]="['/ahorros/', ahorro.id, 'retiros']">Retiro</a> |
-                        <a [routerLink]="['/ahorros/', ahorro.id, 'depositos']">Deposito</a> |
-                        <a [routerLink]="['/ahorros/', ahorro.id, 'editar']">Editar</a> |
-                        <button class="btn btn-outline-danger btn-sm" (click)="borrar(ahorro)">Borrar</button>
-                    </td>
-                </tr>
-            </ng-container>
-        </tbody>
     </table>
 </div>

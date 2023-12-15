@@ -23,6 +23,8 @@
     "datatables.net": "^1.13.8",
     "datatables.net-bs5": "^1.11.3",
     "datatables.net-dt": "^1.13.8",
+    "datatables.net-responsive": "^2.5.0",
+    "datatables.net-responsive-dt": "^2.5.0",
     "jquery": "^3.7.1",
     "rxjs": "~7.8.0",
     "tslib": "^2.3.0",

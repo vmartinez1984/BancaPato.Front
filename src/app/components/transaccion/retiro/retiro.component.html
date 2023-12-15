@@ -1,4 +1,5 @@
 <div class="container">
+    <h2 class="text-primary">Retiro</h2>
     <div class="card">
         <div class="card-body">
             <p>
@@ -12,18 +13,20 @@
     <form [formGroup]="formGroup" (ngSubmit)="guardar()">
         <div>
             <label>Cantidad</label>
-            <input formControlName="cantidad" type="number" class="form-control"
-            [ngClass]="{ 'is-invalid': submitted && f['cantidad'].errors}">
+            <input formControlName="cantidad" type="number" class="form-control" #cantidad
+                [ngClass]="{ 'is-invalid': submitted && f['cantidad'].errors}">
             <div *ngIf="submitted && f['cantidad'].errors?.['required']" class="invalid-feedback">
                 <div *ngIf="f['cantidad'].errors?.['required']">Ingrese una cantidad</div>
             </div>
-        </div>
-        <div>
-            <label>Nota</label>
-            <input formControlName="nota" maxlength="255" class="form-control" />
+            <div>{{ obtenerBalance() | currency}}</div>
         </div>
 
-        <button [routerLink]="['/ahorros', ahorroId]" class="btn btn-outline-secondary mt-3 me-3" type="button">
+        <div>
+            <label>Concepto</label>
+            <input formControlName="concepto" maxlength="255" class="form-control" />
+        </div>
+
+        <button [routerLink]="['/ahorros']" class="btn btn-outline-secondary mt-3 me-3" type="button" [disabled]="estaCargando">
             Cancelar
         </button>
 
