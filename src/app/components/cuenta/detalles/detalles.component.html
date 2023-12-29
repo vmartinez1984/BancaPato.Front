@@ -1,10 +1,16 @@
+<div *ngIf="estaCargando" class="text-center">
+    <div class="spinner-border spinner-border-sm text-primary" role="status">
+        <span class="visually-hidden">Loading...</span>
+    </div>
+    Un momento...
+</div>
 <div class="container">
-    <div class="card">
-        <!-- <div class="card-header">
-            <h2 class="text-primary">Detalles de la cuenta</h2>
-        </div> -->
+    <h2 class="text-info">Ahorro</h2>
+    <div class="card">        
         <div class="card-body">
             <b>Nombre: </b>{{ahorro?.nombre}}
+            <br/>
+            <b>Tipo: </b>{{ahorro?.tipoDeCuenta?.nombre}}
             <br/>
             <b>Nota: </b>{{ahorro?.nota}}
             <br/>            
@@ -19,11 +25,11 @@
             <b>Cantidad esperada: </b>{{ calcularCantidadEsperada() | currency}}
         </div>
     </div>
-
-    <hr/>   
-    
+       
+    <h2 class="text-info">Transacciones</h2>
     <app-lista-de-transacciones/>
 
+    <h2 class="text-info">Proyección</h2>
     <table class="table table-hover">
         <thead>
             <tr>
@@ -48,4 +54,5 @@
             </tr>
         </tbody>
     </table>
+
 </div>

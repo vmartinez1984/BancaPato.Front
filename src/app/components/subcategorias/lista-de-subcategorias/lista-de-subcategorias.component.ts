@@ -24,7 +24,7 @@ export class ListaDeSubcategoriasComponent {
     this.estaCargando = true
     this.repo.subcategoria.obtenerTodos().subscribe({
       next: (subcategorias) => {
-        console.log(subcategorias)
+        //console.log(subcategorias)
         this.subcategorias = subcategorias
         this.estaCargando = false
         this.calcularCantidades()

@@ -1,5 +1,6 @@
 import { Component, Input } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { Toast } from 'src/app/helpers/Toast';
 import { PresupuestoDto } from 'src/app/interfaces/version-dto';
 import { RepositorioService } from 'src/app/services/repositories/repositorio.service';
 
@@ -10,6 +11,7 @@ import { RepositorioService } from 'src/app/services/repositories/repositorio.se
 })
 export class ListaDePresupuestoComponent {
   @Input() versionId!: number
+  estaCargando = false
 
   presupuestos: PresupuestoDto[] = []
 
@@ -21,10 +23,14 @@ export class ListaDePresupuestoComponent {
       //console.log(data)
       this.versionId = data['id']
     })
+    this.estaCargando = true    
     this.repo.presupuesto.obtenerTodos(this.versionId).subscribe({
       next: (presupuestos) => {
         this.presupuestos = presupuestos
         //console.log(presupuestos)
+        this.estaCargando = false
+      }, error: (error)=>{
+        Toast.error()
       }
     })
   }

@@ -42,4 +42,5 @@ export interface MovimientoDto {
 export interface MovimientoPresupuesto {
     movimiento?: MovimientoDto
     presupuesto: PresupuestoDto
+    tipoDeAhorro?: string
 }

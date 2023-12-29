@@ -1,7 +1,7 @@
 import { Component, ElementRef, EventEmitter, Output, ViewChild } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
-import { TipoDeCuentaDto } from 'src/app/interfaces/ahorro-dto';
+import { AhorroDto, TipoDeCuentaDto } from 'src/app/interfaces/ahorro-dto';
 import { MovimientoDtoIn } from 'src/app/interfaces/periodo-dto';
 import { PresupuestoDto } from 'src/app/interfaces/version-dto';
 import { RepositorioService } from 'src/app/services/repositories/repositorio.service';
@@ -24,6 +24,7 @@ export class FormularioMovimientoComponent {
   versionId: any;
   presupuestoId: any;
   ahorroId: any;
+  ahorro!: AhorroDto
 
   get f() { return this.formGroup.controls }
 
@@ -44,10 +45,21 @@ export class FormularioMovimientoComponent {
       this.presupuestoId = data['presupuestoId']
       this.ahorroId = data['ahorroId']
       this.obtenerPresupuestos(this.versionId)
+      this.obtenerAhorro(data['ahorroId'])
     })
     setTimeout(() => {
       this.inputCantidad.nativeElement.focus()
     }, 500)
+  }
+
+  obtenerAhorro(ahorroId: any) {
+    if (ahorroId != undefined)
+      this.repo.ahorro.obtener(ahorroId).subscribe({
+        next: (ahorro) => {
+          this.ahorro = ahorro
+          //console.log(ahorro)
+        }
+      })
   }
 
   ngOnInit() {

@@ -14,6 +14,7 @@ export interface VersionDtoIn {
 }
 
 export interface PresupuestoDto {
+    ahorroTipo?: string
     ahorroId?: number
     id: number
     subcategoria: SubcategoriaDto

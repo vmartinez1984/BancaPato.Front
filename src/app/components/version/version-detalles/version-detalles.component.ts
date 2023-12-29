@@ -10,13 +10,13 @@ export class VersionDetallesComponent {
   versionId!: number
 
   constructor(private activatedRoute: ActivatedRoute) {
-    console.log("detalles")
+    //console.log("detalles")
     this.activatedRoute.params.subscribe((data) => {
-      console.log(data)
+      //console.log(data)
       this.versionId = data['id']
     })
     this.activatedRoute.queryParams.subscribe((data) => {
-      console.log(data)
+      //console.log(data)
     })
   }
 

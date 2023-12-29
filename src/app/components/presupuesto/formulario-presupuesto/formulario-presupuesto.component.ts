@@ -13,14 +13,14 @@ import { RepositorioService } from 'src/app/services/repositories/repositorio.se
 export class FormularioPresupuestoComponent {
   submitted: boolean = false
   get f() { return this.formGroup.controls }
-  estaCargando = false
-
+  protected estaCargando = false
+  
   formGroup!: FormGroup
   subcategorias: SubcategoriaDto[] = []
   ahorros: AhorroDto[] = []
 
   @Output() eventEmitter = new EventEmitter<PresupuestoDto>()
-  @Input() presupuesto?: PresupuestoDto
+  @Input() presupuesto?: PresupuestoDto  
 
   constructor(
     private repo: RepositorioService,
@@ -60,7 +60,7 @@ export class FormularioPresupuestoComponent {
       subcategoriaId: ['', Validators.required],
       cantidad: ['', Validators.required],
       cantidadMeta: '',
-      ahorroId: ['', Validators.required],
+      ahorroId: [''],
     })
   }
 
@@ -93,4 +93,23 @@ export class FormularioPresupuestoComponent {
     var index = this.subcategorias.findIndex(x => x.id == id)
     return this.subcategorias[index]
   }
+
+  cargando(estaCargando: boolean){
+    this.estaCargando = estaCargando
+    this.habilitarFormulario(estaCargando)
+  }
+
+  protected habilitarFormulario(habilitar: boolean) {
+    if (habilitar) {
+     this.formGroup.controls['subcategoriaId'].disable()
+     this.formGroup.controls['cantidad'].disable()
+     this.formGroup.controls['cantidadMeta'].disable()
+     this.formGroup.controls['ahorroId'].disable()     
+   } else {
+     this.formGroup.controls['subcategoriaId'].enable()
+     this.formGroup.controls['cantidad'].enable()
+     this.formGroup.controls['cantidadMeta'].enable()
+     this.formGroup.controls['ahorroId'].enable()     
+   }
+ }
 }

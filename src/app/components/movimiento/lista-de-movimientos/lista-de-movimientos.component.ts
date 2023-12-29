@@ -81,11 +81,26 @@ export class ListaDeMovimientosComponent {
         })
         //console.log(this.movimientos)
         this.estaCargando = false
+        this.obtenerAhorros()
       },
       error: (error) => {
         alert('Valio pepino')
       }
     })
+  }
+
+  obtenerAhorros() {
+    this.repo.ahorro.obtenerTodos().subscribe({
+      next: (ahorros)=>{
+        ahorros.forEach(item =>{
+          var index = this.movimientos.findIndex(x=> x.presupuesto.ahorroId== item.id)          
+          if(index != -1){
+            this.movimientos[index].tipoDeAhorro = item.tipoDeCuenta.nombre
+          }
+        })
+      }
+    })
+    
   }
 
   obtenerPeriodo(id: any) {
