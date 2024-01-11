@@ -13,9 +13,7 @@ export class ListaDeSubcategoriasComponent {
   estaCargando = false
   balance = 0
   totalDePrimarios = 0
-  subcategoria!: SubcategoriaDto
-  categorias: string[] = ['Entradas', 'Gastos', 'Apartados', 'Primarios', 'Gastos y apartado']
-  valores!: number[]  
+  valores!: number[]
 
   dtOptions: DataTables.Settings = {}
   dtTrigger: Subject<any> = new Subject<any>()
@@ -27,63 +25,57 @@ export class ListaDeSubcategoriasComponent {
         //console.log(subcategorias)
         this.subcategorias = subcategorias
         this.estaCargando = false
+        this.dtTrigger.next(null)
         this.calcularCantidades()
       }
     })
   }
 
-  ngOnInit(){
+  ngOnInit() {
     this.dtOptions = {
       pagingType: 'full_numbers',
-      responsive: true
+      responsive: true,      
+      language: {
+        info: 'Mostrando pagina _PAGE_ de _PAGES_',
+        infoEmpty: 'Registros no disponibles',
+        infoFiltered: '(filtered from _MAX_ total records)',
+        lengthMenu: 'Mostrando _MENU_ registros por página',
+        zeroRecords: 'No hay registros',
+        search: 'Buscar'       
+      },
+      lengthMenu: [
+        [-1, 25, 10],
+        ['Todos', 25, 10]
+    ]
     }
   }
 
   calcularCantidades() {
     var entradas = 0
-        var gastos = 0
-        var apartados = 0
-        this.balance=0
-        this.totalDePrimarios= 0
-        this.subcategorias.forEach(item => {
-          if (item.categoria.id == 1)
-            this.balance += item.presupuesto
-          else
-            this.balance -= item.presupuesto
-          if(item.esPrimario)
-            this.totalDePrimarios += item.presupuesto
-          switch (item.categoria.id) {
-            case 1:
-              entradas += item.presupuesto
-              break
-            case 2:
-              gastos += item.presupuesto
-              break
-            case 3:
-              apartados += item.presupuesto
-              break
-          }
-        })
-        this.valores = [entradas, gastos, apartados, this.totalDePrimarios, (gastos + apartados)]
+    var gastos = 0
+    var apartados = 0
+    this.balance = 0
+    this.totalDePrimarios = 0
+    this.subcategorias.forEach(item => {
+      if (item.categoria.id == 1)
+        this.balance += item.presupuesto
+      else
+        this.balance -= item.presupuesto
+      if (item.esPrimario)
+        this.totalDePrimarios += item.presupuesto
+      switch (item.categoria.id) {
+        case 1:
+          entradas += item.presupuesto
+          break
+        case 2:
+          gastos += item.presupuesto
+          break
+        case 3:
+          apartados += item.presupuesto
+          break
+      }
+    })
+    this.valores = [entradas, gastos, apartados, this.totalDePrimarios, (gastos + apartados)]
   }
 
-  editar(subcategoria: SubcategoriaDto) {
-    this.subcategoria = subcategoria    
-  }
-
-  actualizar(subcategoriaDto: SubcategoriaDto) {
-    var index = this.subcategorias.findIndex(x => x.id == subcategoriaDto.id)
-    //console.log(this.subcategorias[index])
-    this.subcategorias[index].presupuesto = subcategoriaDto.presupuesto
-    this.subcategorias[index].cantidadMeta = subcategoriaDto.cantidadMeta
-    this.subcategorias[index].categoria = subcategoriaDto.categoria
-    this.subcategorias[index].esPrimario = subcategoriaDto.esPrimario
-    this.subcategorias[index].estaActivo = subcategoriaDto.estaActivo
-    //this.subcategorias[index].guid = subcategoriaDto.guid
-    this.subcategorias[index].nombre = subcategoriaDto.nombre
-    this.subcategorias[index].nota = subcategoriaDto.nota
-    //console.log(this.subcategorias)
-    this.calcularCantidades()   
-  }
-  
 }

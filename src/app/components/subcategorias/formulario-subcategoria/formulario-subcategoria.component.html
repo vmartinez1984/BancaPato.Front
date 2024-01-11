@@ -47,8 +47,7 @@
     </div>
 
     <div class="text-end">
-        <button type="button" class="btn btn-secondary m-1" data-bs-dismiss="modal" [disabled]="estaCargando"
-            id="botonCerrarDelmodalSubcategoria">Cancelar</button>
+        <a class="btn btn-secondary m-1" routerLink="/subcategorias">Cancelar</a>
 
         <button type="submit" class="btn btn-primary" [disabled]="estaCargando">
             <div *ngIf="estaCargando">

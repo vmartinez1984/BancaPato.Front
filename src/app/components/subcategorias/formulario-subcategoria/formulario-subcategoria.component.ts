@@ -64,7 +64,7 @@ export class FormularioSubcategoriaComponent {
   }
 
   guardar() {
-    console.log(this.formGroup.value)
+    //console.log(this.formGroup.value)
     this.submitted = true
     if (this.formGroup.valid) {
       var subcategoria: SubcategoriaDto = {
@@ -81,21 +81,6 @@ export class FormularioSubcategoriaComponent {
       this.eventEmmiter.emit(subcategoria)
     }    
   }
-
-  // obtenerSubcategoria(id: number, subcategoria: SubcategoriaDtoIn): SubcategoriaDto {
-  //   var subcategoriaDto: SubcategoriaDto = {
-  //     id: id,
-  //     presupuesto: subcategoria.presupuesto,
-  //     cantidadMeta: subcategoria.cantidadMeta,
-  //     categoria: this.obtenerCategoria(subcategoria.categoriaId),
-  //     esPrimario: subcategoria.esPrimario,
-  //     estaActivo: true,
-  //     nombre: subcategoria.nombre,
-  //     nota: subcategoria.nota
-  //   }
-
-  //   return subcategoriaDto
-  // }
 
   obtenerCategoria(categoriaId: number): CategoriaDto {
     var categoria: CategoriaDto = { id: 0, nombre: '' }
@@ -126,11 +111,13 @@ export class FormularioSubcategoriaComponent {
       this.formGroup.controls['categoriaId'].enable()
       this.formGroup.controls['cantidad'].enable()
       this.formGroup.controls['nombre'].enable()
+      this.formGroup.controls['nota'].enable()
       this.formGroup.controls['esPrimario'].enable()
     } else {
       this.formGroup.controls['categoriaId'].disable()
       this.formGroup.controls['cantidad'].disable()
       this.formGroup.controls['nombre'].disable()
+      this.formGroup.controls['nota'].disable()
       this.formGroup.controls['esPrimario'].disable()
     }
   }

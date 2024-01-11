@@ -1,11 +1,10 @@
-import { Component, EventEmitter, Input, Output, ViewChild } from '@angular/core';
-//import { Guid } from 'src/app/helpers/Guid';
-//import { Toast } from 'src/app/helpers/Toast';
-import { SubcategoriaDto, SubcategoriaDtoIn } from 'src/app/interfaces/subcategoria-dto';
-//import { ModalComponent } from '../../modal/modal.component'
-import { RepositorioService } from 'src/app/services/repositories/repositorio.service';
-import { ActivatedRoute, Params, Router } from '@angular/router';
-import { CategoriaDto } from 'src/app/interfaces/categoria-dto';
+import { Component, EventEmitter, Input, Output, ViewChild } from '@angular/core'
+import { SubcategoriaDto, SubcategoriaDtoIn } from 'src/app/interfaces/subcategoria-dto'
+import { RepositorioService } from 'src/app/services/repositories/repositorio.service'
+import { ActivatedRoute, Params, Router } from '@angular/router'
+import { CategoriaDto } from 'src/app/interfaces/categoria-dto'
+import { FormularioSubcategoriaComponent } from '../formulario-subcategoria/formulario-subcategoria.component'
+import { Toast } from 'src/app/helpers/Toast'
 
 @Component({
   selector: 'app-editar-subcategoria',
@@ -17,8 +16,7 @@ export class EditarSubcategoriaComponent {
   @Output() eventEmmiter = new EventEmitter<SubcategoriaDto>()
   @Input() subcategoria!: SubcategoriaDto
 
-  //@ViewChild('formulario') formulario!: FormularioSubcategoriaComponent
-  //@ViewChild('modalEditarSubcategoria') modal!: ModalComponent
+  @ViewChild('formulario') formulario!: FormularioSubcategoriaComponent  
 
   constructor(
     private repo: RepositorioService,
@@ -55,18 +53,14 @@ export class EditarSubcategoriaComponent {
     console.log(subcategoria)
     //this.formulario.estaGuardando(true)
     this.repo.subcategoria.actualizar(subcategoria.id, this.obtenerSubcategoriaDtoIn(subcategoria)).subscribe({
-      next: (data) => {
-        // this.formulario.estaGuardando(false)
-        // this.modal.cerrarModal()        
-        //this.eventEmmiter.emit(subcategoria)
-        // Toast.ok()
-        // this.formulario.estaGuardando(false)
+      next: (data) => {       
+        this.formulario.estaGuardando(false)
         this.router.navigate(['subcategorias'])
       },
       error: (data) => {
         console.log(data)
-        //Toast.error()
-        //this.formulario.estaGuardando(false)
+        this.formulario.estaGuardando(false)
+        Toast.error()
       }
     })
   }

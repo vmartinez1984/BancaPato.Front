@@ -4,12 +4,12 @@
     </p>
     <h2 class="text-primary">Movimientos</h2>
 
-    <div *ngIf="estaCargando" class="text-center">
+    <!-- <div *ngIf="estaCargando" class="text-center">
         <div class="spinner-border spinner-border-sm text-primary" role="status">
             <span class="visually-hidden">Loading...</span>
         </div>
         Un momento...
-    </div>
+    </div> -->
 
     <!-- <div *ngIf="!estaCargando"> -->
     <table datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger" class="table table-hover">
@@ -26,8 +26,8 @@
             </tr>
         </thead>
         <tbody>
-            <!-- <tr *ngIf="estaCargando">
-                <td>
+            <tr *ngIf="estaCargando">
+                <td colspan="7">
                     <div class="text-center">
                         <div class="spinner-border spinner-border-sm text-primary" role="status">
                             <span class="visually-hidden">Loading...</span>
@@ -36,7 +36,7 @@
                     </div>
                 </td>
             </tr>
-            <ng-container *ngIf="!estaCargando"> -->
+            <!-- <ng-container *ngIf="!estaCargando"> -->
             <tr *ngFor="let item of movimientos">
                 <!-- <td>{{index + 1}}</td> -->
                 <td>{{item.movimiento?.id}}</td>

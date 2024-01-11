@@ -17,7 +17,7 @@ export class ListaDeMovimientosComponent {
   versionId: any = 0
   ahorro?: AhorroDto;
   estaCargando: boolean = false
-  
+
   dtOptions: DataTables.Settings = {}
   dtTrigger: Subject<any> = new Subject<any>()
 
@@ -37,7 +37,7 @@ export class ListaDeMovimientosComponent {
     this.obtenerCuentaDeNomina()
   }
 
-  ngOnInit(){
+  ngOnInit() {
     this.dtOptions = {
       pagingType: 'full_numbers',
       responsive: true
@@ -62,8 +62,7 @@ export class ListaDeMovimientosComponent {
           this.movimientos.push({ presupuesto: item })
         })
         this.obtenerMovimientos(this.id)
-        this.estaCargando = false
-        this.dtTrigger.next(null)
+        this.estaCargando = false       
       }
     })
   }
@@ -91,16 +90,17 @@ export class ListaDeMovimientosComponent {
 
   obtenerAhorros() {
     this.repo.ahorro.obtenerTodos().subscribe({
-      next: (ahorros)=>{
-        ahorros.forEach(item =>{
-          var index = this.movimientos.findIndex(x=> x.presupuesto.ahorroId== item.id)          
-          if(index != -1){
+      next: (ahorros) => {
+        ahorros.forEach(item => {
+          var index = this.movimientos.findIndex(x => x.presupuesto.ahorroId == item.id)
+          if (index != -1) {
+            //console.log(item.tipoDeCuenta.nombre)
             this.movimientos[index].tipoDeAhorro = item.tipoDeCuenta.nombre
           }
         })
+        this.dtTrigger.next(null)
       }
     })
-    
   }
 
   obtenerPeriodo(id: any) {
