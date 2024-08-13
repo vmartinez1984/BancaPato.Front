@@ -1,3 +1,4 @@
+import { MovimientoDto } from "./periodo-dto"
 import { SubcategoriaDto } from "./subcategoria-dto"
 
 export interface VersionDto {
@@ -5,6 +6,7 @@ export interface VersionDto {
     nombre: string
     fechaInicial: Date
     fechaFinal: Date
+    presupuestos: PresupuestoDto[]
 }
 
 export interface VersionDtoIn {
@@ -14,7 +16,8 @@ export interface VersionDtoIn {
 }
 
 export interface PresupuestoDto {
-    ahorroTipo?: string
+    movimientos: MovimientoDto[]
+    ahorroTipo: string
     ahorroId?: number
     id: number
     subcategoria: SubcategoriaDto
@@ -25,8 +28,8 @@ export interface PresupuestoDto {
 
 export interface PresupuestoDtoIn {    
     subcategoriaId: number
-    cantidad: number
-    cantidadMeta: number
+    cantidad: number    
     versionId: number
     ahorroId?:number
+    ahorroTipo?:string
 }

@@ -24,11 +24,11 @@ export class AgregarPresupuestoComponent {
   agregar(presupuesto: PresupuestoDtoIn) {
     console.log(presupuesto)
     var presupuestoDtoIn: PresupuestoDtoIn = {
-      cantidad: presupuesto.cantidad,
-      cantidadMeta: presupuesto.cantidadMeta + '' == '' ? 0 : presupuesto.cantidadMeta,
+      cantidad: presupuesto.cantidad,      
       subcategoriaId: presupuesto.subcategoriaId,
       versionId: parseInt(this.versionId + ''),
-      ahorroId: presupuesto.ahorroId
+      ahorroId: presupuesto.ahorroId,
+      ahorroTipo: presupuesto.ahorroTipo
     }
     console.log(presupuestoDtoIn)
     this.repo.presupuesto.agregar(this.versionId, presupuestoDtoIn).subscribe({

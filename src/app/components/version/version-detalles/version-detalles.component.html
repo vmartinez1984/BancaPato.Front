@@ -3,5 +3,31 @@
     <h2 class="text-primary">Detalle de presupuesto</h2>
     <hr/>
     <a [routerLink]="['/versiones',versionId,'presupuestos','agregar']">Agregar</a>
-    <app-lista-de-presupuesto [versionId]="versionId"/>
+    <!-- <app-lista-de-presupuesto [versionId]="versionId"/> -->
+    <div *ngIf="estaCargando" class="text-center">
+        <div class="spinner-border spinner-border-sm text-primary" role="status">
+            <span class="visually-hidden">Loading...</span>
+        </div>
+        Un momento...
+    </div>
+    <table class="table table-hover">
+        <thead>
+            <tr>
+                <th>$</th>
+                <th>Nombre</th>
+                <th>Ahorro</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let item of presupuestos">
+                <td>{{item.cantidad | currency}}</td>
+                <td>{{item.subcategoria.nombre}}</td>
+                <td>{{item.ahorroId}} {{item.ahorroTipo}}</td>
+                <td>
+                    <a [routerLink]="['/versiones',item.versionId,'presupuestos','editar',item.id]">Editar</a>
+                </td>
+            </tr>
+        </tbody>
+    </table>
 </div>

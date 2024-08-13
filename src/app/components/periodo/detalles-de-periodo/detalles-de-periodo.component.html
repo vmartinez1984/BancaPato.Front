@@ -1,1 +1,72 @@
-<app-lista-de-movimientos/>
+<div class="container-fluid">
+    <div class="card mb-3">
+        <div class="card-body">
+            <div *ngIf="periodo">
+                <h2>{{periodo.nombre}}</h2>
+                <h3>{{periodo.fechaInicial | date}} {{periodo.fechaInicial | date}}</h3>
+            </div>
+        </div>
+    </div>
+    <table class="table table-hover">
+        <tbody>
+            <tr *ngFor="let item of periodo?.version?.presupuestos">
+                <td>{{item.subcategoria.nombre}} - {{item.ahorroTipo}}</td>
+                <td>{{item.subcategoria.presupuesto | currency}}</td>
+                <td>
+                    <div *ngFor="let movimiento of item.movimientos">{{movimiento.cantidad | currency}}</div>
+                </td>
+                <td>
+                    <button class="btn btn-outline-primary" (click)="agregarMovimiento(item)" type="button" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                        Agregar
+                    </button>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+
+
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <form [formGroup]="formGroup" (ngSubmit)="guardar()">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="exampleModalLabel">Modal title</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div>
+                        {{presupuestoSelecciondo?.subcategoria?.nombre}} <br>
+                        {{presupuestoSelecciondo?.ahorroTipo}} <br>
+                        {{presupuestoSelecciondo?.cantidad | currency}}
+                    </div>
+                    <div>
+                        <label>Cantidad</label>
+                        <input type="number" class="form-control" #cantidad formControlName="cantidad"
+                            [ngClass]="{ 'is-invalid': submitted && f['cantidad'].errors}">
+                        <div *ngIf="submitted && f['cantidad'].errors?.['required']" class="invalid-feedback">
+                            <div *ngIf="f['cantidad'].errors?.['required']">Por favor, ingresa una cantidad</div>
+                        </div>
+                    </div>                  
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                    <button type="submit" class="btn btn-primary" [disabled]="estaCargando">
+                        <div *ngIf="estaCargando">
+                            <div class="spinner-border spinner-border-sm text-light" role="status">
+                                <span class="visually-hidden">Loading...</span>
+                            </div>
+                            Un momento...
+                        </div>
+                        <div *ngIf="!estaCargando">
+                            <i class="bi bi-save"></i>
+                            Guardar
+                        </div>
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

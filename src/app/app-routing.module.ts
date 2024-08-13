@@ -12,18 +12,15 @@ import { AgregarSubcategoriaComponent } from './components/subcategorias/agregar
 import { EditarSubcategoriaComponent } from './components/subcategorias/editar-subcategoria/editar-subcategoria.component';
 import { AgregarPresupuestoComponent } from './components/presupuesto/agregar-presupuesto/agregar-presupuesto.component';
 import { EditarPresupuestoComponent } from './components/presupuesto/editar-presupuesto/editar-presupuesto.component';
-import { ListaDeHistorialComponent } from './components/historial/lista-de-historial/lista-de-historial.component';
-import { AgregarHistorialComponent } from './components/historial/agregar-historial/agregar-historial.component';
 import { ListaDePeriodosComponent } from './components/periodo/lista-de-periodos/lista-de-periodos.component';
 import { AgregarPeriodoComponent } from './components/periodo/agregar-periodo/agregar-periodo.component';
-import { AgregarMovimientoComponent } from './components/movimiento/agregar-movimiento/agregar-movimiento.component';
 import { EditarCuentaComponent } from './components/cuenta/editar-cuenta/editar-cuenta.component';
 import { DetallesDeCuentaComponent } from './components/cuenta/detalles/detalles.component';
 import { DetallesDePeriodoComponent } from './components/periodo/detalles-de-periodo/detalles-de-periodo.component';
 import { VersionDetallesComponent } from './components/version/version-detalles/version-detalles.component';
 
-const routes: Routes = [
-  { path: '', component: ListaDeHistorialComponent},
+const routes: Routes = [  
+  { path: '', component: ListaDeCuentasComponent },
   { path: 'ahorros', component: ListaDeCuentasComponent },
   { path: 'ahorros/agregar', component: AgregarCuentaComponent },
   { path: 'ahorros/:id/retiros', component: RetiroComponent },
@@ -40,12 +37,10 @@ const routes: Routes = [
   { path: 'subcategorias', component: ListaDeSubcategoriasComponent },
   { path: 'subcategorias/agregar', component: AgregarSubcategoriaComponent },
   { path: 'subcategorias/editar/:id', component: EditarSubcategoriaComponent },
-  { path: 'historialDeApartados', component: ListaDeHistorialComponent },
-  { path: 'historialDeApartados/agregar', component: AgregarHistorialComponent },
   { path: 'periodos', component: ListaDePeriodosComponent },
   { path: 'periodos/agregar', component: AgregarPeriodoComponent },
   { path: 'periodos/:id/detalles', component: DetallesDePeriodoComponent },
-  { path: 'periodos/:id/movimientos/agregar', component: AgregarMovimientoComponent },
+
 ];
 
 @NgModule({

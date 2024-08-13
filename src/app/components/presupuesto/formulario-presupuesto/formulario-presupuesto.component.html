@@ -27,11 +27,7 @@
         <div *ngIf="submitted && f['cantidad'].errors?.['required']" class="invalid-feedback">
             <div *ngIf="f['cantidad'].errors?.['required']">Ingresa una cantidad</div>
         </div>
-    </div>
-    <div>
-        <label>Cantidad meta</label>
-        <input type="number" formControlName="cantidadMeta" class="form-control"/>
-    </div>   
+    </div>     
 
     <button [routerLink]="['/versiones', presupuesto?.versionId, 'presupuestos']" class="btn btn-outline-secondary mt-3 me-3" type="button">
         Cancelar

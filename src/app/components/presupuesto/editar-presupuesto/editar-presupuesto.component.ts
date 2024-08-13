@@ -38,8 +38,7 @@ export class EditarPresupuestoComponent {
   actualizar(presupuestoDto: PresupuestoDto) {
     //console.log(presupuestoDto)
     var presupuesto: PresupuestoDtoIn = {
-      cantidad: presupuestoDto.cantidad,
-      cantidadMeta: presupuestoDto.cantidadMeta,
+      cantidad: presupuestoDto.cantidad,      
       subcategoriaId: presupuestoDto.subcategoria.id,
       versionId: presupuestoDto.versionId,
       ahorroId: presupuestoDto.ahorroId

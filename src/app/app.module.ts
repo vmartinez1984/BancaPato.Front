@@ -20,10 +20,6 @@ import { AgregarPeriodoComponent } from './components/periodo/agregar-periodo/ag
 import { EditarPeriodoComponent } from './components/periodo/editar-periodo/editar-periodo.component';
 import { FormularioPeriodoComponent } from './components/periodo/formulario-periodo/formulario-periodo.component';
 import { ListaDePeriodosComponent } from './components/periodo/lista-de-periodos/lista-de-periodos.component';
-import { FormularioMovimientoComponent } from './components/movimiento/formulario-movimiento/formulario-movimiento.component';
-import { AgregarMovimientoComponent } from './components/movimiento/agregar-movimiento/agregar-movimiento.component';
-import { EditarMovimientoComponent } from './components/movimiento/editar-movimiento/editar-movimiento.component';
-import { ListaDeMovimientosComponent } from './components/movimiento/lista-de-movimientos/lista-de-movimientos.component';
 import { AgregarHistorialComponent } from './components/historial/agregar-historial/agregar-historial.component';
 import { EditorialHistorialComponent } from './components/historial/editorial-historial/editorial-historial.component';
 import { EditarHistorialComponent } from './components/historial/editar-historial/editar-historial.component';
@@ -62,10 +58,6 @@ import { DetallesDePeriodoComponent } from './components/periodo/detalles-de-per
     EditarPeriodoComponent,
     FormularioPeriodoComponent,
     ListaDePeriodosComponent,
-    FormularioMovimientoComponent,
-    AgregarMovimientoComponent,
-    EditarMovimientoComponent,
-    ListaDeMovimientosComponent,
     AgregarHistorialComponent,
     EditorialHistorialComponent,
     EditarHistorialComponent,

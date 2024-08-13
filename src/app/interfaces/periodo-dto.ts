@@ -1,4 +1,4 @@
-import { PresupuestoDto } from "./version-dto"
+import { PresupuestoDto, VersionDto } from "./version-dto"
 
 export interface PeriodoDto {
     id: number
@@ -7,6 +7,7 @@ export interface PeriodoDto {
     fechaInicial: Date
     fechaFinal: Date
     versionId: number
+    version?: VersionDto
 }
 
 export interface PeriodoDtoIn {
@@ -23,20 +24,16 @@ export interface TipoDeCuentaDto {
 }
 
 export interface MovimientoDtoIn {
-    guid: string
-    nota: string
+    guid: string    
     presupuestoId: number
-    cantidad: number
-    ahorroId?: number
+    cantidad: number      
 }
 
 export interface MovimientoDto {
     id: number
     cantidad: number
-    guid: string
-    periodoId: number
-    transaccionId: number
-    presupuestoId: number
+    guid: string   
+    fechaDeRegistro: Date
 }
 
 export interface MovimientoPresupuesto {

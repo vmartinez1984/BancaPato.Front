@@ -36,8 +36,7 @@ export class FormularioPresupuestoComponent {
       //console.log("Formulario", this.presupuesto)
       this.formGroup.patchValue({
         subcategoriaId: this.presupuesto.subcategoriaId,
-        cantidad: this.presupuesto.cantidad,
-        cantidadMeta: this.presupuesto.cantidadMeta,
+        cantidad: this.presupuesto.cantidad,        
         ahorroId: this.presupuesto.ahorroId == undefined ? '' : this.presupuesto.ahorroId
       })
     }
@@ -79,12 +78,19 @@ export class FormularioPresupuestoComponent {
     if (this.formGroup.valid) {
       this.eventEmitter.emit({
         cantidad: this.formGroup.get('cantidad')?.value,
-        cantidadMeta: this.formGroup.get('cantidadMeta')?.value,        
+        ahorroTipo: this.obtenerTipoDeAhorro(this.formGroup.get('ahorroId')?.value),
         subcategoriaId: this.formGroup.value.subcategoriaId,
         versionId: this.presupuesto == undefined ? 0 : this.presupuesto.versionId,
         ahorroId: parseInt(this.formGroup.get('ahorroId')?.value)
       })
     }
+  }
+
+  obtenerTipoDeAhorro(value: any): string | undefined {
+    if(value== undefined)
+      return undefined;
+    let index = this.ahorros.findIndex(x=>x.id ==value)
+    return this.ahorros[index].tipoDeCuenta.nombre
   }
 
   obtenerSubcategoria(): SubcategoriaDto {
