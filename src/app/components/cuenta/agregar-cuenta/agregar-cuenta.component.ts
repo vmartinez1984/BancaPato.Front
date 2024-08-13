@@ -37,6 +37,7 @@ export class AgregarCuentaComponent {
       error: (data) => {
         Toast.error()
         console.log(data)
+        this.formulario.cargando(false)
       }
     })
   }

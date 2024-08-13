@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { Toast } from 'src/app/helpers/Toast';
 import { PeriodoDto } from 'src/app/interfaces/periodo-dto';
 import { RepositorioService } from 'src/app/services/repositories/repositorio.service';
 
@@ -26,6 +27,9 @@ export class ListaDePeriodosComponent {
         this.periodos = periodos
         //console.log(this.periodos)
         this.estaCargando = false
+      },
+      error: (error)=>{
+        Toast.error()
       }
     })
   }

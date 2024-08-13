@@ -1,20 +1,34 @@
 <form [formGroup]="formGroup" (ngSubmit)="guardar()">
-    <div>
-        <label>Nombre</label>
-        <input formControlName="nombre" />
+    <div  class="mb-3">
+        <label class="form-label">Nombre</label>
+        <input formControlName="nombre" class="form-control"/>
     </div>    
 
-    <div>
-        <label>Fecha incial</label>
-        <input formControlName="fechaInicial" type="date"/>
+    <div class="mb-3">
+        <label class="form-label">Fecha incial</label>
+        <input formControlName="fechaInicial" type="date" class="form-control"/>
     </div>
     
-    <div>
-        <label>Fecha final</label>
-        <input formControlName="fechaFinal" type="date"/>
+    <div class="mb-3">
+        <label class="form-label">Fecha final</label>
+        <input formControlName="fechaFinal" type="date" class="form-control"/>
     </div>
 
-    <button type="submit">
-        Guardar
-    </button>
+    <div class="text-end">
+        <button type="button" class="btn btn-secondary m-1" data-bs-dismiss="modal" [disabled]="estaCargando"
+            id="botonCerrarDelModalDePresupuesto">Cancelar</button>
+
+        <button type="submit" class="btn btn-primary" [disabled]="estaCargando">
+            <div *ngIf="estaCargando">
+                <div class="spinner-border spinner-border-sm text-light" role="status">
+                    <span class="visually-hidden">Loading...</span>
+                </div>
+                Un momento...
+            </div>
+            <div *ngIf="!estaCargando">
+                <i class="bi bi-save"></i>
+                Guardar
+            </div>
+        </button>
+    </div>
 </form>

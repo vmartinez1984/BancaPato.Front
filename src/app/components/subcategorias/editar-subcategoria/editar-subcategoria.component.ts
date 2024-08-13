@@ -50,7 +50,7 @@ export class EditarSubcategoriaComponent {
   actualizar(subcategoria: SubcategoriaDto) {
     //subcategoria.guid = this.subcategoria.guid
     subcategoria.id = this.subcategoria.id
-    console.log(subcategoria)
+    //console.log(subcategoria)
     //this.formulario.estaGuardando(true)
     this.repo.subcategoria.actualizar(subcategoria.id, this.obtenerSubcategoriaDtoIn(subcategoria)).subscribe({
       next: (data) => {       

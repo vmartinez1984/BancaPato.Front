@@ -12,7 +12,7 @@ export class AgregarVersionComponent {
 
   constructor(private repo: RepositorioService,private router: Router) { }
 
-  guardar(version: VersionDto) {
+  guardar(version: VersionDtoIn) {
     console.log(version)
     var versionDtoIn: VersionDtoIn = {
       fechaFinal: version.fechaFinal,

@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { VersionDto } from 'src/app/interfaces/version-dto';
+import { VersionDto, VersionDtoIn } from 'src/app/interfaces/version-dto';
 import { RepositorioService } from 'src/app/services/repositories/repositorio.service';
 
 @Component({
@@ -23,7 +23,7 @@ export class EditarVersionComponent {
     })
   }
 
-  actualizar(version: VersionDto){
+  actualizar(version: VersionDtoIn){
     this.repo.version.actualizar(this.version.id, {nombre: version.nombre, fechaInicial: version.fechaInicial, fechaFinal: version.fechaFinal}).subscribe({
       next: (data)=>{
         this.router.navigate(['/versiones'])

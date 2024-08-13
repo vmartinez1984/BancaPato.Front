@@ -18,7 +18,7 @@
         <tr *ngFor="let item of presupuestos">
             <td>{{item.cantidad | currency}}</td>
             <td>{{item.subcategoria.nombre}}</td>
-            <td>{{item.ahorroId}}</td>
+            <td>{{item.ahorroId}} {{item.ahorroTipo}}</td>
             <td>
                 <a [routerLink]="['/versiones',item.versionId,'presupuestos','editar',item.id]">Editar</a>
             </td>

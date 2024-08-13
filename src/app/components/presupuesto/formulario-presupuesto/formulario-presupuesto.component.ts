@@ -2,7 +2,7 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AhorroDto } from 'src/app/interfaces/ahorro-dto';
 import { SubcategoriaDto } from 'src/app/interfaces/subcategoria-dto';
-import { PresupuestoDto } from 'src/app/interfaces/version-dto';
+import { PresupuestoDto, PresupuestoDtoIn } from 'src/app/interfaces/version-dto';
 import { RepositorioService } from 'src/app/services/repositories/repositorio.service';
 
 @Component({
@@ -19,8 +19,8 @@ export class FormularioPresupuestoComponent {
   subcategorias: SubcategoriaDto[] = []
   ahorros: AhorroDto[] = []
 
-  @Output() eventEmitter = new EventEmitter<PresupuestoDto>()
-  @Input() presupuesto?: PresupuestoDto  
+  @Output() eventEmitter = new EventEmitter<PresupuestoDtoIn>()
+  @Input() presupuesto?: PresupuestoDtoIn  
 
   constructor(
     private repo: RepositorioService,
@@ -35,7 +35,7 @@ export class FormularioPresupuestoComponent {
     if (this.presupuesto != undefined) {
       //console.log("Formulario", this.presupuesto)
       this.formGroup.patchValue({
-        subcategoriaId: this.presupuesto.subcategoria.id,
+        subcategoriaId: this.presupuesto.subcategoriaId,
         cantidad: this.presupuesto.cantidad,
         cantidadMeta: this.presupuesto.cantidadMeta,
         ahorroId: this.presupuesto.ahorroId == undefined ? '' : this.presupuesto.ahorroId
@@ -79,9 +79,8 @@ export class FormularioPresupuestoComponent {
     if (this.formGroup.valid) {
       this.eventEmitter.emit({
         cantidad: this.formGroup.get('cantidad')?.value,
-        cantidadMeta: this.formGroup.get('cantidadMeta')?.value,
-        id: 0,
-        subcategoria: this.obtenerSubcategoria(),
+        cantidadMeta: this.formGroup.get('cantidadMeta')?.value,        
+        subcategoriaId: this.formGroup.value.subcategoriaId,
         versionId: this.presupuesto == undefined ? 0 : this.presupuesto.versionId,
         ahorroId: parseInt(this.formGroup.get('ahorroId')?.value)
       })

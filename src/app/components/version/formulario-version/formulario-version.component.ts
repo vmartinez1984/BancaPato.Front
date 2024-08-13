@@ -1,6 +1,6 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { VersionDto } from 'src/app/interfaces/version-dto';
+import { VersionDto, VersionDtoIn } from 'src/app/interfaces/version-dto';
 
 @Component({
   selector: 'app-formulario-version',
@@ -9,9 +9,10 @@ import { VersionDto } from 'src/app/interfaces/version-dto';
 })
 export class FormularioVersionComponent {
   formGroup: FormGroup
+  estaCargando = false
 
   @Input() version!: VersionDto
-  @Output() eventEmmiter = new EventEmitter<VersionDto>()
+  @Output() eventEmmiter = new EventEmitter<VersionDtoIn>()
 
   constructor(private formBuilder: FormBuilder) {
     this.formGroup = this.formBuilder.group({
@@ -34,8 +35,7 @@ export class FormularioVersionComponent {
 
   guardar() {
     if (this.formGroup.valid) {
-      var version: VersionDto = {
-        id: this.version.id,
+      var version: VersionDtoIn = {        
         nombre: this.formGroup.get('nombre')?.value,
         fechaInicial: this.formGroup.get('fechaInicial')?.value == '' ? null : this.formGroup.get('fechaInicial')?.value,
         fechaFinal: this.formGroup.get('fechaFinal')?.value == '' ? null : this.formGroup.get('fechaFinal')?.value,

@@ -21,13 +21,14 @@ export class AgregarPresupuestoComponent {
     })
   }
 
-  agregar(presupuesto: PresupuestoDto) {
-    //console.log(presupuesto)
+  agregar(presupuesto: PresupuestoDtoIn) {
+    console.log(presupuesto)
     var presupuestoDtoIn: PresupuestoDtoIn = {
       cantidad: presupuesto.cantidad,
       cantidadMeta: presupuesto.cantidadMeta + '' == '' ? 0 : presupuesto.cantidadMeta,
-      subcategoriaId: presupuesto.subcategoria.id,
-      versionId: parseInt(this.versionId + '')
+      subcategoriaId: presupuesto.subcategoriaId,
+      versionId: parseInt(this.versionId + ''),
+      ahorroId: presupuesto.ahorroId
     }
     console.log(presupuestoDtoIn)
     this.repo.presupuesto.agregar(this.versionId, presupuestoDtoIn).subscribe({

@@ -15,7 +15,7 @@
         <select formControlName="ahorroId" class="form-select"
             [ngClass]="{ 'is-invalid': submitted && f['ahorroId'].errors}" >
             <option value="">Seleccione</option>
-            <option *ngFor="let item of ahorros" value="{{item.id}}">{{item.nombre}} {{item.nota}} {{item.balance| currency}}</option>
+            <option *ngFor="let item of ahorros" value="{{item.id}}">{{item.nombre}} {{item.tipoDeCuenta.nombre}} {{item.balance| currency}}</option>
         </select>
         <div *ngIf="submitted && f['ahorroId'].errors?.['required']" class="invalid-feedback">
             <div *ngIf="f['ahorroId'].errors?.['required']">Seleccione ahorro</div>
