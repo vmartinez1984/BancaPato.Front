@@ -17,17 +17,17 @@ export interface VersionDtoIn {
 
 export interface PresupuestoDto {
     movimientos: MovimientoDto[]
-    ahorroTipo: string
+    ahorroTipo?: string
     ahorroId?: number
     id: number
-    subcategoria: SubcategoriaDto
-    cantidad: number
-    cantidadMeta: number
+    subcategoria?: SubcategoriaDto
+    cantidad: number    
     versionId: number
 }
 
 export interface PresupuestoDtoIn {    
     subcategoriaId: number
+    subcategoriaNombre?:string
     cantidad: number    
     versionId: number
     ahorroId?:number

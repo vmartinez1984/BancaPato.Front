@@ -57,10 +57,9 @@ export class EditarSubcategoriaComponent {
         this.formulario.estaGuardando(false)
         this.router.navigate(['subcategorias'])
       },
-      error: (data) => {
-        console.log(data)
+      error: (data) => {        
         this.formulario.estaGuardando(false)
-        Toast.error()
+        Toast.error(data)
       }
     })
   }

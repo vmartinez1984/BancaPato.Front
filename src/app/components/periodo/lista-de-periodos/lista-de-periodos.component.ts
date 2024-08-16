@@ -29,7 +29,7 @@ export class ListaDePeriodosComponent {
         this.estaCargando = false
       },
       error: (error)=>{
-        Toast.error()
+        Toast.error(error)
       }
     })
   }

@@ -80,16 +80,23 @@ export class FormularioPresupuestoComponent {
         cantidad: this.formGroup.get('cantidad')?.value,
         ahorroTipo: this.obtenerTipoDeAhorro(this.formGroup.get('ahorroId')?.value),
         subcategoriaId: this.formGroup.value.subcategoriaId,
+        subcategoriaNombre: this.obtenerSubcategoriaNombre(this.formGroup.value.subcategoriaId),
         versionId: this.presupuesto == undefined ? 0 : this.presupuesto.versionId,
         ahorroId: parseInt(this.formGroup.get('ahorroId')?.value)
       })
     }
   }
+  obtenerSubcategoriaNombre(subcategoriaId: any): string | undefined {
+    let index = this.subcategorias.findIndex(x=> x.id == subcategoriaId)
+    return this.subcategorias[index].nombre
+  }
 
   obtenerTipoDeAhorro(value: any): string | undefined {
     if(value== undefined)
-      return undefined;
+      return undefined
     let index = this.ahorros.findIndex(x=>x.id ==value)
+    if(index == -1)
+      return undefined
     return this.ahorros[index].tipoDeCuenta.nombre
   }
 

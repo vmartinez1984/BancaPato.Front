@@ -1,33 +1,56 @@
-
 <div class="container">
-    <h2 class="text-primary">Detalle de presupuesto</h2>
-    <hr/>
-    <a [routerLink]="['/versiones',versionId,'presupuestos','agregar']">Agregar</a>
-    <!-- <app-lista-de-presupuesto [versionId]="versionId"/> -->
-    <div *ngIf="estaCargando" class="text-center">
-        <div class="spinner-border spinner-border-sm text-primary" role="status">
-            <span class="visually-hidden">Loading...</span>
-        </div>
-        Un momento...
+  <h2 class="text-primary">Detalle de presupuesto</h2>
+  <hr />
+  <!-- Button trigger modal -->
+  <button type="button" class="btn btn-outline-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+    Agregar
+  </button>
+
+  <!-- <app-lista-de-presupuesto [versionId]="versionId"/> -->
+  <div *ngIf="estaCargando" class="text-center">
+    <div class="spinner-border spinner-border-sm text-primary" role="status">
+      <span class="visually-hidden">Loading...</span>
     </div>
-    <table class="table table-hover">
-        <thead>
-            <tr>
-                <th>$</th>
-                <th>Nombre</th>
-                <th>Ahorro</th>
-                <th></th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr *ngFor="let item of presupuestos">
-                <td>{{item.cantidad | currency}}</td>
-                <td>{{item.subcategoria.nombre}}</td>
-                <td>{{item.ahorroId}} {{item.ahorroTipo}}</td>
-                <td>
-                    <a [routerLink]="['/versiones',item.versionId,'presupuestos','editar',item.id]">Editar</a>
-                </td>
-            </tr>
-        </tbody>
-    </table>
+    Un momento...
+  </div>
+  <h2>{{total | currency}}</h2>
+  <table class="table table-hover">
+    <thead>
+      <tr>
+        <th>Nombre</th>
+        <th>$</th>
+        <th>Ahorro</th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let item of presupuestos">
+        <td>{{item.subcategoria?.nombre}}</td>
+        <td>{{item.cantidad | currency}}</td>
+        <td>{{item.ahorroId}} {{item.ahorroTipo}}</td>
+        <td>
+          <a [routerLink]="['/versiones',item.versionId,'presupuestos','editar',item.id]">Editar</a>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="exampleModalLabel">Agregar presupuesto</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" #botonQueCierraElModal></button>
+      </div>
+      <div class="modal-body">
+        <app-formulario-presupuesto (eventEmitter)="agregar($event)" />
+      </div>
+      <!-- <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-primary">Save changes</button>
+        </div> -->
+    </div>
+  </div>
 </div>

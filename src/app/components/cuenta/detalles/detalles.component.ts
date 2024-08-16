@@ -48,8 +48,8 @@ export class DetallesDeCuentaComponent {
         //console.log(this.ahorro)
         this.estaCargando = false
       }, error: (error)=>{
-        console.log(error)
-        Toast.error()
+        //console.log(error)
+        Toast.error(error)
       }
     })
   }

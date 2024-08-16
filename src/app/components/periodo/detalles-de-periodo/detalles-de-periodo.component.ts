@@ -1,6 +1,7 @@
-import { Component } from '@angular/core';
+import { Component, ElementRef, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
+import { data } from 'jquery';
 import { Guid } from 'src/app/helpers/Guid';
 import { MovimientoDtoIn, PeriodoDto } from 'src/app/interfaces/periodo-dto';
 import { PresupuestoDto } from 'src/app/interfaces/version-dto';
@@ -20,6 +21,7 @@ export class DetallesDePeriodoComponent {
 
   periodoId: any
   periodo!: PeriodoDto
+  balance = 0
 
   constructor(
     private activateRoute: ActivatedRoute,
@@ -32,9 +34,9 @@ export class DetallesDePeriodoComponent {
       this.obtenerPeriod(this.periodoId)
     })
     this.formGroup = this.formbuilder.group({
-      cantidad: 0,
-      nota: ''
+      cantidad: 0,      
     })
+    this.obtenerAhorroFondeador()
   }
 
   obtenerPeriod(periodoId: any) {
@@ -46,11 +48,21 @@ export class DetallesDePeriodoComponent {
     })
   }
 
+  obtenerAhorroFondeador(){
+    this.repo.ahorro.obtenerFondeador().subscribe({
+      next:(data)=>{
+        this.balance = data.balance
+        console.log(data)
+      }
+    })
+  }
+
   submitted: boolean = false
   estaCargando: boolean = false
   formGroup!: FormGroup
   get f() { return this.formGroup.controls }
   presupuestoSelecciondo?: PresupuestoDto
+  @ViewChild('botonDeCerrar') botonDeCerrar?: ElementRef
 
   guardar() {
     const movimiento: MovimientoDtoIn = {
@@ -61,12 +73,11 @@ export class DetallesDePeriodoComponent {
     this.repo.periodo.agregarMovimiento(this.periodoId, movimiento).subscribe({
       next: (data)=>{
         console.log(data)
+        this.botonDeCerrar?.nativeElement.click()
+        this.obtenerAhorroFondeador()
+        this.obtenerPeriod(this.periodoId)
+        this.formGroup.patchValue({cantidad : 0})
       }
     })
-    /*
-    peridoId
-    presupuestoId
-    cantidad
-     */
   }
 }

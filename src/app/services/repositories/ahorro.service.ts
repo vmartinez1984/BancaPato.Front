@@ -10,6 +10,9 @@ import { environment } from 'src/environments/environment.development';
   providedIn: 'root'
 })
 export class AhorroService {
+  obtenerFondeador() :Observable<AhorroDto>{
+    return this.httpClient.get<AhorroDto>(this.url+ "fondeador")
+  }
 
   borrar(id: number): Observable<any> {
     return this.httpClient.delete(this.url + id)

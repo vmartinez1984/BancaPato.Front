@@ -12,10 +12,7 @@ import { AgregarCuentaComponent } from './components/cuenta/agregar-cuenta/agreg
 import { EditarCuentaComponent } from './components/cuenta/editar-cuenta/editar-cuenta.component';
 import { FormularioCuentaComponent } from './components/cuenta/formulario-cuenta/formulario-cuenta.component';
 import { ListaDeCuentasComponent } from './components/cuenta/lista-de-cuentas/lista-de-cuentas.component';
-import { ListaDePresupuestoComponent } from './components/presupuesto/lista-de-presupuesto/lista-de-presupuesto.component';
-import { FormularioPresupuestoComponent } from './components/presupuesto/formulario-presupuesto/formulario-presupuesto.component';
-import { EditarPresupuestoComponent } from './components/presupuesto/editar-presupuesto/editar-presupuesto.component';
-import { AgregarPresupuestoComponent } from './components/presupuesto/agregar-presupuesto/agregar-presupuesto.component';
+import { FormularioPresupuestoComponent } from './components/version/formulario-presupuesto/formulario-presupuesto.component';
 import { AgregarPeriodoComponent } from './components/periodo/agregar-periodo/agregar-periodo.component';
 import { EditarPeriodoComponent } from './components/periodo/editar-periodo/editar-periodo.component';
 import { FormularioPeriodoComponent } from './components/periodo/formulario-periodo/formulario-periodo.component';
@@ -50,10 +47,7 @@ import { DetallesDePeriodoComponent } from './components/periodo/detalles-de-per
     AgregarCuentaComponent,
     EditarCuentaComponent,
     ListaDeCuentasComponent,
-    ListaDePresupuestoComponent,
     FormularioPresupuestoComponent,
-    EditarPresupuestoComponent,
-    AgregarPresupuestoComponent,
     AgregarPeriodoComponent,
     EditarPeriodoComponent,
     FormularioPeriodoComponent,

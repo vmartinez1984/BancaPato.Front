@@ -1,7 +1,7 @@
 import { Component, ElementRef, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import { data } from 'jquery';
+import { data, error } from 'jquery';
 import { Guid } from 'src/app/helpers/Guid';
 import { Toast } from 'src/app/helpers/Toast';
 import { AhorroDto } from 'src/app/interfaces/ahorro-dto';
@@ -73,8 +73,7 @@ export class DepositoComponent {
           this.cargando(false)
           this.router.navigate(['ahorros'])
         }, error: (data) => {
-          Toast.error()
-          console.log(data)
+          Toast.error(data)          
           this.cargando(false)
         }
       })

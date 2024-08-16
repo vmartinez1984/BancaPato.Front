@@ -10,8 +10,6 @@ import { AgregarVersionComponent } from './components/version/agregar-version/ag
 import { EditarVersionComponent } from './components/version/editar-version/editar-version.component';
 import { AgregarSubcategoriaComponent } from './components/subcategorias/agregar-subcategoria/agregar-subcategoria.component';
 import { EditarSubcategoriaComponent } from './components/subcategorias/editar-subcategoria/editar-subcategoria.component';
-import { AgregarPresupuestoComponent } from './components/presupuesto/agregar-presupuesto/agregar-presupuesto.component';
-import { EditarPresupuestoComponent } from './components/presupuesto/editar-presupuesto/editar-presupuesto.component';
 import { ListaDePeriodosComponent } from './components/periodo/lista-de-periodos/lista-de-periodos.component';
 import { AgregarPeriodoComponent } from './components/periodo/agregar-periodo/agregar-periodo.component';
 import { EditarCuentaComponent } from './components/cuenta/editar-cuenta/editar-cuenta.component';
@@ -32,8 +30,6 @@ const routes: Routes = [
   { path: 'versiones/agregar', component: AgregarVersionComponent },
   { path: 'versiones/editar/:id', component: EditarVersionComponent },
   { path: 'versiones/:id/presupuestos', component: VersionDetallesComponent },
-  { path: 'versiones/:id/presupuestos/agregar', component: AgregarPresupuestoComponent },
-  { path: 'versiones/:id/presupuestos/editar/:presupuestoId', component: EditarPresupuestoComponent },
   { path: 'subcategorias', component: ListaDeSubcategoriasComponent },
   { path: 'subcategorias/agregar', component: AgregarSubcategoriaComponent },
   { path: 'subcategorias/editar/:id', component: EditarSubcategoriaComponent },

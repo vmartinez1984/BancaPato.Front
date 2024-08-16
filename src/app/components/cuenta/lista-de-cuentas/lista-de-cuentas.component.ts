@@ -82,8 +82,8 @@ export class ListaDeCuentasComponent {
           this.ahorros.splice(index, 1)
         },
         error:(data)=>{
-          Toast.error()
-          console.log(data)
+          Toast.error(data)
+          //console.log(data)
         }
       })
     }
